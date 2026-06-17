@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fundació Kālida · Transformación Digital</title>
+  <title>Kālida Foundation · Digital Transformation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&display=swap"
     rel="stylesheet">
   <style>
-    /* ═══ VARIABLES GLOBALES ═══ */
+    /* ═══ GLOBAL VARIABLES ═══ */
     :root {
       --salmon: #E8735A;
       --navy: #1C3554;
@@ -41,12 +41,12 @@
       overflow: hidden;
     }
 
-    /* ═══ CONTENEDOR DE SLIDES Y TRANSICIONES ═══ */
+    /* ═══ SLIDE CONTAINER AND TRANSITIONS ═══ */
     #slider-container {
       position: relative;
       width: 100vw;
       height: calc(100vh - 56px);
-      /* Espacio exacto para la nav-bar */
+      /* Exact space reserved for the nav bar */
       overflow: hidden;
     }
 
@@ -58,7 +58,7 @@
       height: 100%;
       opacity: 0;
       visibility: hidden;
-      /* Transición inicial (cuando entra desde la derecha) */
+      /* Initial transition (when entering from the right) */
       transform: translateX(6vw) scale(0.97);
       transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1),
         transform 0.8s cubic-bezier(0.25, 1, 0.5, 1),
@@ -74,11 +74,11 @@
     }
 
     .slide.prev-slide {
-      /* Transición de salida (cuando se va hacia la izquierda) */
+      /* Exit transition (when leaving to the left) */
       transform: translateX(-6vw) scale(0.97);
     }
 
-    /* ═══ ANIMACIONES GLOBALES (Solo corren si el slide es activo) ═══ */
+    /* ═══ GLOBAL ANIMATIONS (Only run if the slide is active) ═══ */
     @keyframes fadeUp {
       from {
         opacity: 0;
@@ -114,7 +114,7 @@
     }
 
     /* =========================================
-       SLIDE 1: PORTADA
+       SLIDE 1: COVER
        ========================================= */
     .s1-wrap {
       display: flex;
@@ -1158,7 +1158,7 @@
     }
 
     /* =========================================
-       BARRA DE NAVEGACIÓN GLOBAL
+       GLOBAL NAVIGATION BAR
        ========================================= */
     .nav-bar {
       position: fixed;
@@ -1174,12 +1174,12 @@
       z-index: 100;
       overflow: visible;
       transition: height 0.4s cubic-bezier(.4,0,.2,1);
-      /* Entra animada junto con el primer slide */
+      /* Animates in together with the first slide */
       opacity: 0;
       animation: fadeUp .6s ease 1.6s forwards;
     }
 
-    /* Estado colapsado: solo se ven los logos */
+    /* Collapsed state: only the logos are visible */
     .nav-bar.collapsed {
       height: 34px;
     }
@@ -1187,7 +1187,7 @@
       height: 56px;
     }
 
-    /* Extiende el área de hover hacia arriba (por si el puntero entra desde arriba) */
+    /* Extends the hover area upward (in case the pointer enters from above) */
     .nav-bar.collapsed::before {
       content: '';
       position: absolute;
@@ -1196,7 +1196,7 @@
       height: 16px;
     }
 
-    /* Flecha ↑ sutil en el centro cuando está colapsada */
+    /* Subtle ↑ arrow in the center when collapsed */
     .nav-bar.collapsed::after {
       content: '';
       position: absolute;
@@ -1216,7 +1216,7 @@
     }
     .nav-bar.collapsed:hover::after { opacity: 0; }
 
-    /* Middle: flechas + hint + dots */
+    /* Middle: arrows + hint + dots */
     .nav-bar.collapsed .nav-arrows,
     .nav-bar.collapsed .nav-hint,
     .nav-bar.collapsed .nav-dots {
@@ -1315,7 +1315,7 @@
       filter: blur(0);
     }
 
-    /* ═══ IMPORTAR GOTHAM ROUNDED LOCALMENTE ═══ */
+    /* ═══ IMPORT GOTHAM ROUNDED LOCALLY ═══ */
 
     /* Light (300) */
     @font-face {
@@ -1358,7 +1358,7 @@
     }
 
     /* =========================================
-       SLIDE 4: ANATOMÍA DE UN PROCESO ROTO
+       SLIDE 4: ANATOMY OF A BROKEN PROCESS
        ========================================= */
     .s4-wrap {
       display: flex;
@@ -1704,7 +1704,7 @@
     .diag-desc strong { color: var(--navy); font-weight: 700; }
 
     /* =========================================
-       SLIDE 5: UN PROCESO ROTO SE MULTIPLICA
+       SLIDE 5: A BROKEN PROCESS MULTIPLIES
        ========================================= */
     .s5-wrap {
       display: flex;
@@ -1845,7 +1845,7 @@
       background: rgba(255,255,255,.3);
     }
 
-    /* ── ×2 central ── */
+    /* ── Central ×2 ── */
     .s5-multiplier {
       width: 17vw;
       flex-shrink: 0;
@@ -2041,7 +2041,7 @@
       letter-spacing: .01em;
     }
 
-    /* Logo derecho nav — Kālida Connect */
+    /* Right nav logo — Kālida Connect */
     .nav-logo-right {
       position: absolute;
       right: 2vw;
@@ -2061,7 +2061,7 @@
     }
 
     /* =============================================
-       Slide 7 — Kālida Connect API (arquitectura)
+       Slide 7 — Kālida Connect API (architecture)
        ============================================= */
     #slide-6 { background: #07111e; }
     body.s7-active { background: #07111e; }
@@ -2141,8 +2141,8 @@
     .s7-np { position: absolute; }
     .s7-np1 { left: 18.2%; top: 18.5%; transform: translate(-50%,-50%); } /* Sinergia TL */
     .s7-np2 { left: 81.8%; top: 18.5%; transform: translate(-50%,-50%); } /* WordPress TR */
-    .s7-np3 { left: 18.2%; top: 81.5%; transform: translate(-50%,-50%); } /* Centros BL */
-    .s7-np4 { left: 81.8%; top: 81.5%; transform: translate(-50%,-50%); } /* App Móvil BR */
+    .s7-np3 { left: 18.2%; top: 81.5%; transform: translate(-50%,-50%); } /* Centers BL */
+    .s7-np4 { left: 81.8%; top: 81.5%; transform: translate(-50%,-50%); } /* Mobile App BR */
 
     .s7-node {
       display: flex;
@@ -2197,7 +2197,7 @@
       filter: brightness(0) invert(1);
     }
 
-    /* Centros Físicos */
+    /* Physical Centers */
     .s7-icon-centro {
       background: rgba(255,255,255,.05);
       border: 1.5px solid rgba(255,255,255,.18);
@@ -2208,7 +2208,7 @@
       object-fit: contain;
     }
 
-    /* App Móvil — future */
+    /* Mobile App — future */
     .s7-icon-app {
       background: rgba(232,115,90,.05);
       border: 1.5px dashed rgba(232,115,90,.38);
@@ -2232,7 +2232,7 @@
       border: 2px solid #07111e;
     }
 
-    /* FUTURO badge */
+    /* FUTURE badge */
     .s7-badge-future {
       position: absolute;
       top: -.12vw; right: -.12vw;
@@ -2292,7 +2292,7 @@
     /* Midpoints (SVG coords / viewBox size): */
     .s7-dir1 { left: 34.1%; top: 34.3%; } /* mid of Hub(960,540)→Sinergia(350,200) */
     .s7-dir2 { left: 65.9%; top: 34.3%; } /* mid of Hub→WP(1570,200) */
-    .s7-dir3 { left: 34.1%; top: 65.7%; } /* mid of Hub→Centro(350,880) */
+    .s7-dir3 { left: 34.1%; top: 65.7%; } /* mid of Hub→Center(350,880) */
     .s7-dir4 { left: 65.9%; top: 65.7%; } /* mid of Hub→App(1570,880) */
 
     .slide.active .s7-dir1 { animation: fadeIn .4s ease 1.35s forwards; }
@@ -2301,7 +2301,7 @@
     .slide.active .s7-dir4 { animation: fadeIn .4s ease 2.55s forwards; }
 
     /* =========================================
-       SLIDE 8: ARQUITECTURA TÉCNICA
+       SLIDE 8: TECHNICAL ARCHITECTURE
        ========================================= */
     #slide-7 { background: #07111e; }
 
@@ -2446,7 +2446,7 @@
     }
 
     /* =========================================
-       SLIDE 9: LAS FASES DEL PROYECTO
+       SLIDE 9: PROJECT PHASES
        ========================================= */
     #slide-8 { background: #07111e; }
 
@@ -2508,12 +2508,12 @@
       color: rgba(255,255,255,.7);
       transition: border-color .35s ease, color .35s ease, box-shadow .35s ease;
     }
-    /* Fase 4 node — muy apagado, sin interactividad */
+    /* Phase 4 node — very dimmed, no interactivity */
     .s9-phase-opt .s9-node {
       border-style: dashed; border-color: rgba(255,255,255,.1);
       color: rgba(255,255,255,.2);
     }
-    /* Fases 0-3 highlight */
+    /* Phases 0-3 highlight */
     .s9-phase:not(.s9-phase-opt).s9-hi .s9-node,
     .s9-phase:not(.s9-phase-opt):hover .s9-node {
       border-color: #E8735A; color: #E8735A;
@@ -2530,7 +2530,7 @@
       position: relative; overflow: hidden;
       transition: border-color .35s ease, background .35s ease, transform .35s ease, box-shadow .35s ease;
     }
-    /* Watermark numérico — más visible */
+    /* Numeric watermark — more visible */
     .s9-card::before {
       content: attr(data-n);
       position: absolute; right: -.02em; bottom: -.2em;
@@ -2538,7 +2538,7 @@
       color: rgba(255,255,255,.1); line-height: 1;
       pointer-events: none; letter-spacing: -.06em;
     }
-    /* Fases 0-3: hover y highlight activos */
+    /* Phases 0-3: active hover and highlight */
     .s9-phase:not(.s9-phase-opt).s9-hi .s9-card,
     .s9-phase:not(.s9-phase-opt):hover .s9-card {
       border-color: rgba(232,115,90,.3);
@@ -2550,7 +2550,7 @@
     .s9-phase:not(.s9-phase-opt):hover .s9-card::before {
       color: rgba(232,115,90,.18);
     }
-    /* Fase 4 — card muy oscura, sin hover */
+    /* Phase 4 — very dark card, no hover */
     .s9-phase-opt .s9-card {
       border-style: dashed; border-color: rgba(255,255,255,.05);
       background: rgba(0,0,0,.15); opacity: .5;
@@ -2594,7 +2594,7 @@
     .s9-phase:not(.s9-phase-opt):hover .s9-item { color: rgba(255,255,255,.88); }
     .s9-phase:not(.s9-phase-opt).s9-hi .s9-item::before,
     .s9-phase:not(.s9-phase-opt):hover .s9-item::before { color: rgba(232,115,90,.6); }
-    /* Fase 4 items: muy apagados */
+    /* Phase 4 items: very dimmed */
     .s9-phase-opt .s9-item { color: rgba(255,255,255,.3); }
     .s9-phase-opt .s9-item::before { color: rgba(255,255,255,.1); }
 
@@ -2616,7 +2616,7 @@
     .slide.active .s9-foot { animation: fadeIn .6s ease 1.5s forwards; }
 
     /* =========================================
-       SLIDE 10: CIERRE
+       SLIDE 10: CLOSING
        ========================================= */
     #slide-9 { background: #fff; }
 
@@ -2628,7 +2628,7 @@
       position: relative; overflow: hidden;
     }
 
-    /* Halo ambiental que respira */
+    /* Breathing ambient halo */
     .s10-glow {
       position: absolute;
       width: clamp(360px,55vw,800px); height: clamp(360px,55vw,800px);
@@ -2657,7 +2657,7 @@
       height: clamp(42px,5vh,72px); width: auto; object-fit: contain; border-radius: 8px;
     }
 
-    /* Separador entre logos */
+    /* Separator between logos */
     .s10-sep { display: flex; flex-direction: column; align-items: center; gap: 5px; flex-shrink: 0; }
     .s10-sep-line {
       width: 1px; height: clamp(18px,2.8vh,34px);
@@ -2668,7 +2668,7 @@
       box-shadow: 0 0 12px rgba(232,115,90,.55);
     }
 
-    /* Titular principal */
+    /* Main headline */
     .s10-headline {
       font-size: clamp(22px,2.9vw,48px); font-weight: 800;
       color: #14213d; line-height: 1.2; text-align: center;
@@ -2678,7 +2678,7 @@
     .slide.active .s10-headline { animation: fadeUp .9s ease .5s forwards; }
     .s10-hl-accent { color: #E8735A; }
 
-    /* Subtítulo / frase estratégica */
+    /* Subtitle / strategic statement */
     .s10-subline {
       font-size: clamp(13px,1.3vw,21px); color: rgba(20,33,61,.45);
       text-align: center; max-width: 64%; line-height: 1.6;
@@ -2686,7 +2686,7 @@
     }
     .slide.active .s10-subline { animation: fadeUp .8s ease .82s forwards; }
 
-    /* Línea decorativa */
+    /* Decorative line */
     .s10-divider {
       width: clamp(44px,5vw,72px); height: 1.5px;
       background: linear-gradient(90deg, transparent, #E8735A, transparent);
@@ -2694,7 +2694,7 @@
     }
     .slide.active .s10-divider { animation: fadeIn .6s ease 1.1s forwards; }
 
-    /* Botones CTA */
+    /* CTA buttons */
     .s10-ctas {
       display: flex; gap: clamp(12px,1.5vw,20px); flex-wrap: wrap; justify-content: center;
       opacity: 0;
@@ -2721,7 +2721,7 @@
     }
     .s10-btn-outline:hover { background: rgba(232,115,90,.06); border-color: #E8735A; }
 
-    /* Pie de diapositiva */
+    /* Slide footer */
     .s10-footer {
       font-size: clamp(9px,.72vw,11px); color: rgba(20,33,61,.2);
       letter-spacing: .12em; text-transform: uppercase;
@@ -2730,7 +2730,7 @@
     }
     .slide.active .s10-footer { animation: fadeIn .6s ease 1.7s forwards; }
 
-    /* Toast — maximizar ventana */
+    /* Toast — maximize window */
     .toast-hint {
       position: fixed;
       bottom: 72px;
@@ -2795,8 +2795,8 @@
           <img src="img/KALIDA2_RGB.png" alt="Kālida" style="height:12vh; display:block;">
         </div>
         <div class="rule"></div>
-        <div class="foundation">Fundación <span>Kālida</span></div>
-        <div class="s1-title">Plan de Transformación Digital</div>
+        <div class="foundation">Foundation <span>Kālida</span></div>
+        <div class="s1-title">Digital Transformation Plan</div>
         <div class="date-badge">
           <span class="year">2026</span>
           <span class="sep">—</span>
@@ -2808,9 +2808,9 @@
     <div class="slide" id="slide-1">
       <div class="s2-wrap">
         <div class="s2-left">
-          <div class="tag">Ecosistema digital · Hoy</div>
-          <div class="s2-title">La web de<br>Kālida hoy</div>
-          <p class="s2-sub">Todo lo que la fundación ofrece al mundo pasa por un único punto digital.</p>
+          <div class="tag">Digital Ecosystem · Today</div>
+          <div class="s2-title">Kālida's<br>website today</div>
+          <p class="s2-sub">Everything the foundation offers the world goes through a single digital touchpoint.</p>
           <div class="module-list" id="module-list"></div>
         </div>
         <div class="s2-right">
@@ -2887,7 +2887,7 @@
                 <div class="sphere-shimmer"></div>
               </div>
             </div>
-            <div class="sphere-label">Sitio Web Kālida en Wordpress</div>
+            <div class="sphere-label">Kālida Website on WordPress</div>
           </div>
         </div>
         <div class="connector">
@@ -2912,18 +2912,18 @@
           </div>
         </div>
         <div class="s3-right">
-          <div class="tag">Sistema de Gestión Interna</div>
+          <div class="tag">Internal Management System</div>
           <div class="s3-title">Sinergia CRM</div>
-          <p class="s3-sub">El motor administrativo de Kālida. Centraliza la operativa interna y sincroniza en tiempo
-            real todo lo que la web necesita publicar.</p>
+          <p class="s3-sub">Kālida's administrative engine. It centralizes internal operations and syncs in
+            real time everything the website needs to publish.</p>
           <div class="feature-list">
             <div class="feature-item">
               <div class="fi-icon">
                 <div class="fi-dot"></div>
               </div>
               <div>
-                <div class="fi-name">Gestión administrativa completa</div>
-                <div class="fi-desc">Presupuestos, facturación, proveedores y control económico de la fundación.</div>
+                <div class="fi-name">Complete administrative management</div>
+                <div class="fi-desc">Budgets, invoicing, suppliers and the foundation's financial control.</div>
               </div>
             </div>
             <div class="feature-item">
@@ -2931,8 +2931,8 @@
                 <div class="fi-dot"></div>
               </div>
               <div>
-                <div class="fi-name">Pacientes, familias y voluntariado</div>
-                <div class="fi-desc">Registro, historial y seguimiento de todas las personas vinculadas a Kālida.</div>
+                <div class="fi-name">Patients, families and volunteers</div>
+                <div class="fi-desc">Registration, history and tracking of everyone connected to Kālida.</div>
               </div>
             </div>
             <div class="feature-item">
@@ -2940,9 +2940,9 @@
                 <div class="fi-dot"></div>
               </div>
               <div>
-                <div class="fi-name">Agenda y actividades</div>
-                <div class="fi-desc">Talleres, grupos y eventos gestionados internamente y publicados automáticamente en
-                  la web.</div>
+                <div class="fi-name">Schedule and activities</div>
+                <div class="fi-desc">Workshops, groups and events managed internally and published automatically on
+                  the website.</div>
               </div>
             </div>
             <div class="feature-item">
@@ -2950,9 +2950,9 @@
                 <div class="fi-dot"></div>
               </div>
               <div>
-                <div class="fi-name">Informes y métricas de impacto</div>
-                <div class="fi-desc">Reporting para donantes e instituciones generado desde los datos reales de
-                  Sinergia.</div>
+                <div class="fi-name">Impact reports and metrics</div>
+                <div class="fi-desc">Reporting for donors and institutions generated from real
+                  Sinergia data.</div>
               </div>
             </div>
           </div>
@@ -2960,28 +2960,28 @@
       </div>
     </div>
 
-<!-- ─── SLIDE 4: ANATOMÍA DE UN PROCESO ROTO ─── -->
+<!-- ─── SLIDE 4: ANATOMY OF A BROKEN PROCESS ─── -->
     <div class="slide" id="slide-3">
       <div class="s4-wrap">
 
         <!-- HEADER -->
         <div class="s4-head">
-          <div class="tag">Operativa Actual</div>
-          <div class="s4-title">Anatomía de un proceso roto</div>
-          <p class="s4-sub">Publicar un taller requiere intervención manual en cada paso. Y cada nuevo módulo hereda exactamente el mismo problema.</p>
+          <div class="tag">Current Operations</div>
+          <div class="s4-title">Anatomy of a broken process</div>
+          <p class="s4-sub">Publishing a workshop requires manual intervention at every step. And every new module inherits exactly the same problem.</p>
         </div>
 
         <!-- FLOW -->
         <div class="s4-flow-zone">
-          <div class="s4-zone-label">El flujo de un taller · de Sinergia a WordPress</div>
+          <div class="s4-zone-label">The workshop flow · from Sinergia to WordPress</div>
           <div class="flow-track">
 
             <div class="flow-node-wrap">
               <div class="flow-node fn-system">
                 <span class="fn-num">01</span>
               </div>
-              <div class="fn-role fn-role-sys">Psicooncóloga</div>
-              <div class="fn-action">Crea el taller en Sinergia CRM</div>
+              <div class="fn-role fn-role-sys">Psycho-oncologist</div>
+              <div class="fn-action">Creates the workshop in Sinergia CRM</div>
             </div>
 
             <div class="flow-node-wrap">
@@ -2990,7 +2990,7 @@
               </div>
               <div class="fn-badge fn-badge-auto">Auto</div>
               <div class="fn-role fn-role-sys">Sinergia → WP</div>
-              <div class="fn-action">Genera un borrador en WordPress</div>
+              <div class="fn-action">Generates a draft in WordPress</div>
             </div>
 
             <div class="flow-node-wrap">
@@ -2998,8 +2998,8 @@
                 <span class="fn-num">03</span>
               </div>
               <div class="fn-badge fn-badge-manual">Manual</div>
-              <div class="fn-role fn-role-manual">Becario</div>
-              <div class="fn-action">Revisa y edita el borrador</div>
+              <div class="fn-role fn-role-manual">Intern</div>
+              <div class="fn-action">Reviews and edits the draft</div>
             </div>
 
             <div class="flow-node-wrap">
@@ -3007,16 +3007,16 @@
                 <span class="fn-num">04</span>
               </div>
               <div class="fn-badge fn-badge-manual">Manual</div>
-              <div class="fn-role fn-role-manual">Becario</div>
-              <div class="fn-action">Publica manualmente en WordPress</div>
+              <div class="fn-role fn-role-manual">Intern</div>
+              <div class="fn-action">Publishes manually on WordPress</div>
             </div>
 
             <div class="flow-node-wrap">
               <div class="flow-node fn-alert">
                 <span class="fn-num">05</span>
               </div>
-              <div class="fn-role fn-role-alert">Becario / Externo</div>
-              <div class="fn-action">Errores básicos: becario · Errores graves: proveedor externo</div>
+              <div class="fn-role fn-role-alert">Intern / External</div>
+              <div class="fn-action">Basic errors: intern · Serious errors: external provider</div>
             </div>
 
           </div>
@@ -3027,13 +3027,13 @@
 
           <!-- Silos -->
           <div class="s4-silos">
-            <div class="s4-zone-label-static">Tres silos sin conexión real</div>
+            <div class="s4-zone-label-static">Three silos with no real connection</div>
             <div class="silo-row">
               <div class="silo-block silo-excel">
                 <div class="silo-name">Excel</div>
                 <div class="silo-items">
-                  <div class="silo-item">Psicooncólogas</div>
-                  <div class="silo-item">Administrativo</div>
+                  <div class="silo-item">Psycho-oncologists</div>
+                  <div class="silo-item">Administrative</div>
                 </div>
               </div>
               <div class="silo-connector">
@@ -3044,8 +3044,8 @@
               <div class="silo-block silo-sinergia">
                 <div class="silo-name">Sinergia</div>
                 <div class="silo-items">
-                  <div class="silo-item">CRM principal</div>
-                  <div class="silo-item">Datos parciales</div>
+                  <div class="silo-item">Main CRM</div>
+                  <div class="silo-item">Partial data</div>
                 </div>
               </div>
               <div class="silo-connector">
@@ -3056,8 +3056,8 @@
               <div class="silo-block silo-wp">
                 <div class="silo-name">WordPress</div>
                 <div class="silo-items">
-                  <div class="silo-item">Web pública</div>
-                  <div class="silo-item">Sistema cerrado</div>
+                  <div class="silo-item">Public website</div>
+                  <div class="silo-item">Closed system</div>
                 </div>
               </div>
             </div>
@@ -3065,29 +3065,29 @@
 
           <!-- Diagnosis -->
           <div class="s4-diagnosis">
-            <div class="s4-zone-label-static">Por qué no podemos escalar</div>
+            <div class="s4-zone-label-static">Why we can't scale</div>
 
             <div class="diag-item">
               <div class="diag-num">01</div>
               <div class="diag-body">
-                <div class="diag-title">WordPress como monolito cerrado</div>
-                <div class="diag-desc">Sin API pública ni modelo de datos compartido. Cualquier integración nueva exige desarrollo desde cero.</div>
+                <div class="diag-title">WordPress as a closed monolith</div>
+                <div class="diag-desc">No public API or shared data model. Any new integration requires development from scratch.</div>
               </div>
             </div>
 
             <div class="diag-item">
               <div class="diag-num">02</div>
               <div class="diag-body">
-                <div class="diag-title">Cada módulo nuevo hereda el problema</div>
-                <div class="diag-desc"><strong>Iniciativas Solidarias</strong> seguirá el mismo ciclo — borrador, revisión manual, publicación manual. La fricción crece con la organización.</div>
+                <div class="diag-title">Every new module inherits the problem</div>
+                <div class="diag-desc"><strong>Solidarity Initiatives</strong> will follow the same cycle — draft, manual review, manual publishing. Friction grows along with the organization.</div>
               </div>
             </div>
 
             <div class="diag-item">
               <div class="diag-num">03</div>
               <div class="diag-body">
-                <div class="diag-title">Sin capacidad técnica interna</div>
-                <div class="diag-desc">Errores graves externalizados. Datos clave en Excel fuera de Sinergia. La organización escala en hojas de cálculo, no en infraestructura.</div>
+                <div class="diag-title">No internal technical capacity</div>
+                <div class="diag-desc">Serious errors outsourced. Key data sits in Excel outside Sinergia. The organization scales on spreadsheets, not infrastructure.</div>
               </div>
             </div>
 
@@ -3097,45 +3097,45 @@
       </div>
     </div>
 
-    <!-- ─── SLIDE 5: UN PROCESO ROTO SE MULTIPLICA ─── -->
+    <!-- ─── SLIDE 5: A BROKEN PROCESS MULTIPLIES ─── -->
     <div class="slide" id="slide-4">
       <div class="s5-wrap">
 
         <div class="s5-head">
-          <div class="tag">El problema de escalar</div>
-          <div class="s5-title">Un proceso roto se multiplica</div>
-          <p class="s5-sub">Abrir el Centro 2 en Granollers no duplica solo el espacio. Duplica cada proceso manual, cada error, y cada dato que hoy no se registra.</p>
+          <div class="tag">The problem of scaling</div>
+          <div class="s5-title">A broken process multiplies</div>
+          <p class="s5-sub">Opening Center 2 in Granollers doesn't just double the space. It doubles every manual process, every error, and every piece of data that goes unrecorded today.</p>
         </div>
 
         <div class="s5-centers">
 
           <div class="s5-photo-wrap s5-photo-left">
-            <img src="img/kalida1.jpg" alt="Centro 1 · Barcelona">
+            <img src="img/kalida1.jpg" alt="Center 1 · Barcelona">
             <div class="s5-photo-overlay"></div>
             <div class="s5-photo-label">
-              <div class="s5-photo-tag">Centro 1 · Barcelona · Activo</div>
-              <div class="s5-photo-name">Fundació Kālida</div>
-              <div class="s5-pp">Publicación manual de talleres</div>
-              <div class="s5-pp">Gestión de errores por becario</div>
-              <div class="s5-pp">Datos en Excel fuera de Sinergia</div>
+              <div class="s5-photo-tag">Center 1 · Barcelona · Active</div>
+              <div class="s5-photo-name">Kālida Foundation</div>
+              <div class="s5-pp">Manual workshop publishing</div>
+              <div class="s5-pp">Error handling by intern</div>
+              <div class="s5-pp">Data in Excel outside Sinergia</div>
             </div>
           </div>
 
           <div class="s5-multiplier">
             <div class="s5-x2">×2</div>
             <div class="s5-x2-line"></div>
-            <div class="s5-x2-caption">Lo que sale mal, sale mal dos veces</div>
+            <div class="s5-x2-caption">What goes wrong, goes wrong twice</div>
           </div>
 
           <div class="s5-photo-wrap s5-photo-right">
-            <img src="img/kalida2.png" alt="Centro 2 · Granollers">
+            <img src="img/kalida2.png" alt="Center 2 · Granollers">
             <div class="s5-photo-overlay" style="background:linear-gradient(to top, rgba(12,28,52,.98) 0%, rgba(12,28,52,.82) 50%, rgba(12,28,52,.3) 100%);"></div>
             <div class="s5-photo-label">
-              <div class="s5-photo-tag">Centro 2 · Granollers · Proximamente</div>
+              <div class="s5-photo-tag">Center 2 · Granollers · Coming soon</div>
               <div class="s5-photo-name">Kālida Granollers</div>
-              <div class="s5-pp s5-pp-unknown">¿Quién gestiona los talleres?</div>
-              <div class="s5-pp s5-pp-unknown">¿Quién resuelve los errores web?</div>
-              <div class="s5-pp s5-pp-unknown">¿Otro Excel? ¿Otro becario?</div>
+              <div class="s5-pp s5-pp-unknown">Who manages the workshops?</div>
+              <div class="s5-pp s5-pp-unknown">Who fixes the website errors?</div>
+              <div class="s5-pp s5-pp-unknown">Another Excel sheet? Another intern?</div>
             </div>
           </div>
 
@@ -3145,26 +3145,26 @@
 
           <div class="s5-frac">
             <div class="s5-frac-x">×2</div>
-            <div class="s5-frac-title">Error humano</div>
-            <div class="s5-frac-desc">Dos flujos de revisión sin trazabilidad. <strong>Sin sistema no hay forma de saber quién cambió qué, ni cuándo.</strong></div>
+            <div class="s5-frac-title">Human error</div>
+            <div class="s5-frac-desc">Two review flows with no traceability. <strong>Without a system there's no way to know who changed what, or when.</strong></div>
           </div>
 
           <div class="s5-frac">
             <div class="s5-frac-x">×2</div>
-            <div class="s5-frac-title">Tiempo manual</div>
-            <div class="s5-frac-desc">Cada taller, publicación y corrección multiplicada por dos centros. <strong>El becario no escala. El tiempo, tampoco.</strong></div>
+            <div class="s5-frac-title">Manual time</div>
+            <div class="s5-frac-desc">Every workshop, publication and correction multiplied across two centers. <strong>The intern doesn't scale. Neither does time.</strong></div>
           </div>
 
           <div class="s5-frac">
             <div class="s5-frac-x">×2</div>
-            <div class="s5-frac-title">Datos invisibles</div>
-            <div class="s5-frac-desc">Lo que hoy no entra a Sinergia, tampoco entrará mañana. <strong>Dos centros, dos hojas de Excel, cero visibilidad para los donantes.</strong></div>
+            <div class="s5-frac-title">Invisible data</div>
+            <div class="s5-frac-desc">What doesn't make it into Sinergia today won't make it in tomorrow either. <strong>Two centers, two Excel sheets, zero visibility for donors.</strong></div>
           </div>
 
           <div class="s5-frac">
             <div class="s5-frac-x">∞</div>
-            <div class="s5-frac-title">Sin base para crecer</div>
-            <div class="s5-frac-desc">WordPress no puede orquestar dos centros. <strong>Cada nuevo módulo exige refactorizar desde cero.</strong></div>
+            <div class="s5-frac-title">No base to grow on</div>
+            <div class="s5-frac-desc">WordPress can't orchestrate two centers. <strong>Every new module requires refactoring from scratch.</strong></div>
           </div>
 
         </div>
@@ -3176,7 +3176,7 @@
     <div class="slide" id="slide-5">
       <div class="s6-wrap">
 
-        <div class="s6-intro">Y como solución, presentamos a:</div>
+        <div class="s6-intro">And as the solution, we present:</div>
 
         <div class="s6-brand" id="s6-brand">
           <video id="kc-video" class="s6-video" muted playsinline>
@@ -3187,8 +3187,8 @@
         </div>
 
         <div class="s6-tagline" id="kc-tagline">
-          Del proceso manual a la automatización real —<br>
-          <strong>La infraestructura digital diseñada para que el equipo se centre en lo que de verdad importa: las personas.</strong>
+          From manual process to real automation —<br>
+          <strong>The digital infrastructure designed so the team can focus on what really matters: people.</strong>
         </div>
 
       </div>
@@ -3198,23 +3198,23 @@
     <div class="slide" id="slide-6">
       <div class="s7-wrap">
 
-        <!-- SVG spokes — 4 nodos en cuadrantes, hub en (960,540) -->
+        <!-- SVG spokes — 4 nodes in quadrants, hub at (960,540) -->
         <svg class="s7-svg" viewBox="0 0 1920 1080" preserveAspectRatio="none">
           <!-- Sinergia ↔ Hub -->
           <line class="s7-spoke s7-sp-solid s7-sp1" x1="960" y1="540" x2="350"  y2="200"/>
           <!-- Hub ↔ WordPress -->
           <line class="s7-spoke s7-sp-solid s7-sp2" x1="960" y1="540" x2="1570" y2="200"/>
-          <!-- Centros Físicos → Hub -->
+          <!-- Physical Centers → Hub -->
           <line class="s7-spoke s7-sp-solid s7-sp3" x1="960" y1="540" x2="350"  y2="880"/>
-          <!-- Hub → App Móvil (futuro) -->
+          <!-- Hub → Mobile App (future) -->
           <line class="s7-spoke s7-sp-future s7-sp4" x1="960" y1="540" x2="1570" y2="880"/>
         </svg>
 
-        <!-- Direction chips en los puntos medios de cada línea -->
-        <div class="s7-dir s7-dir1">↔ bidireccional</div>
-        <div class="s7-dir s7-dir2">↔ bidireccional</div>
-        <div class="s7-dir s7-dir3">→ entrada</div>
-        <div class="s7-dir s7-dir4">→ salida</div>
+        <!-- Direction chips at the midpoint of each line -->
+        <div class="s7-dir s7-dir1">↔ bidirectional</div>
+        <div class="s7-dir s7-dir2">↔ bidirectional</div>
+        <div class="s7-dir s7-dir3">→ inbound</div>
+        <div class="s7-dir s7-dir4">→ outbound</div>
 
         <!-- Hub logo -->
         <div class="s7-hub">
@@ -3222,7 +3222,7 @@
         </div>
 
         <!-- Title -->
-        <div class="s7-title">La centralita que lo conecta todo</div>
+        <div class="s7-title">The switchboard that connects everything</div>
 
         <!-- Sinergia — top-left -->
         <div class="s7-np s7-np1">
@@ -3233,9 +3233,9 @@
             <div>
               <div class="s7-node-title">Sinergia CRM</div>
               <div class="s7-chips">
-                <span class="s7-chip">Pacientes</span>
-                <span class="s7-chip">Eventos</span>
-                <span class="s7-chip">Economía</span>
+                <span class="s7-chip">Patients</span>
+                <span class="s7-chip">Events</span>
+                <span class="s7-chip">Finance</span>
               </div>
             </div>
           </div>
@@ -3250,44 +3250,44 @@
             <div>
               <div class="s7-node-title">WordPress</div>
               <div class="s7-chips">
-                <span class="s7-chip">Agenda</span>
-                <span class="s7-chip">Tienda</span>
+                <span class="s7-chip">Calendar</span>
+                <span class="s7-chip">Shop</span>
                 <span class="s7-chip">Blog</span>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Centros Físicos ×2 — bottom-left -->
+        <!-- Physical Centers ×2 — bottom-left -->
         <div class="s7-np s7-np3">
           <div class="s7-node">
             <div class="s7-icon s7-icon-centro">
-              <img src="img/hogar.png" alt="Centros Físicos">
+              <img src="img/hogar.png" alt="Physical Centers">
               <div class="s7-badge-x2">×2</div>
             </div>
             <div>
-              <div class="s7-node-title">Centros Físicos</div>
+              <div class="s7-node-title">Physical Centers</div>
               <div class="s7-chips">
-                <span class="s7-chip">Aforo</span>
-                <span class="s7-chip">Registros</span>
-                <span class="s7-chip">Informes</span>
+                <span class="s7-chip">Capacity</span>
+                <span class="s7-chip">Records</span>
+                <span class="s7-chip">Reports</span>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- App Móvil — bottom-right (futuro) -->
+        <!-- Mobile App — bottom-right (future) -->
         <div class="s7-np s7-np4">
           <div class="s7-node">
             <div class="s7-icon s7-icon-app">
-              <img src="img/app.png" alt="App Móvil">
-              <div class="s7-badge-future">Futuro</div>
+              <img src="img/app.png" alt="Mobile App">
+              <div class="s7-badge-future">Future</div>
             </div>
             <div>
-              <div class="s7-node-title">App Móvil</div>
+              <div class="s7-node-title">Mobile App</div>
               <div class="s7-chips">
-                <span class="s7-chip">Notificaciones</span>
-                <span class="s7-chip">Impacto</span>
+                <span class="s7-chip">Notifications</span>
+                <span class="s7-chip">Impact</span>
               </div>
             </div>
           </div>
@@ -3296,21 +3296,21 @@
       </div>
     </div>
 
-    <!-- ─── SLIDE 8: ARQUITECTURA TÉCNICA ─── -->
+    <!-- ─── SLIDE 8: TECHNICAL ARCHITECTURE ─── -->
     <div class="slide" id="slide-7">
       <div class="s8-wrap">
 
-        <div class="s8-eyebrow">Arquitectura Técnica · Infraestructura</div>
+        <div class="s8-eyebrow">Technical Architecture · Infrastructure</div>
 
         <div class="s8-infra">
 
-          <!-- Servidor externo: Sinergia -->
+          <!-- External server: Sinergia -->
           <div class="s8-server s8-ext">
             <div class="s8-srv-hd">
-              <img src="img/server1.png" class="s8-srv-img" alt="Servidor externo">
+              <img src="img/server1.png" class="s8-srv-img" alt="External server">
               <div class="s8-srv-meta">
-                <div class="s8-srv-name">Nube Externa</div>
-                <div class="s8-srv-env">Gestionado por Sinergia S.A. · No controlado por Kālida</div>
+                <div class="s8-srv-name">External Cloud</div>
+                <div class="s8-srv-env">Managed by Sinergia S.A. · Not controlled by Kālida</div>
               </div>
               <div class="s8-srv-badges">
                 <span class="s8-srv-badge s8-badge-blue">SaaS</span>
@@ -3329,11 +3329,11 @@
                 <span class="s8-chip">OAuth 2.0</span>
                 <span class="s8-chip">JSON</span>
               </div>
-              <div class="s8-box-note">Pacientes · Eventos · Economía · Informes · Histórico</div>
+              <div class="s8-box-note">Patients · Events · Finance · Reports · History</div>
             </div>
 
             <div class="s8-endpoints">
-              <div class="s8-endpoints-label">Endpoints que consume la API</div>
+              <div class="s8-endpoints-label">Endpoints consumed by the API</div>
               <div class="s8-chips">
                 <span class="s8-chip blue">GET /patients</span>
                 <span class="s8-chip blue">GET /events</span>
@@ -3343,24 +3343,24 @@
             </div>
           </div>
 
-          <!-- Conexión -->
+          <!-- Connection -->
           <div class="s8-conn">
             <div class="s8-conn-dash"></div>
             <div class="s8-conn-arr">↔</div>
-            <div class="s8-conn-label">HTTPS<br>REST · JSON<br>Bidireccional</div>
+            <div class="s8-conn-label">HTTPS<br>REST · JSON<br>Bidirectional</div>
             <div class="s8-conn-dash"></div>
           </div>
 
-          <!-- Nuestro servidor -->
+          <!-- Our server -->
           <div class="s8-server s8-own">
             <div class="s8-srv-hd">
-              <img src="img/server2.png" class="s8-srv-img" alt="Servidor Kālida">
+              <img src="img/server2.png" class="s8-srv-img" alt="Kālida Server">
               <div class="s8-srv-meta">
-                <div class="s8-srv-name">Servidor Kālida</div>
-                <div class="s8-srv-env">VPS · Ubuntu 22.04 LTS · SSL/TLS · Firewall UFW</div>
+                <div class="s8-srv-name">Kālida Server</div>
+                <div class="s8-srv-env">VPS · Ubuntu 22.04 LTS · SSL/TLS · UFW Firewall</div>
               </div>
               <div class="s8-srv-badges">
-                <span class="s8-srv-badge s8-badge-orange">Propio</span>
+                <span class="s8-srv-badge s8-badge-orange">Own</span>
                 <span class="s8-srv-badge s8-badge-green">99.9%</span>
               </div>
             </div>
@@ -3374,87 +3374,87 @@
                 <span class="s8-chip">PHP 8.2</span>
                 <span class="s8-chip">MySQL 8.0</span>
                 <span class="s8-chip">WooCommerce</span>
-                <span class="s8-chip">Puerto 443</span>
+                <span class="s8-chip">Port 443</span>
               </div>
-              <div class="s8-box-note">Agenda · Tienda · Blog · Formularios · Campañas · Iniciativas</div>
+              <div class="s8-box-note">Calendar · Shop · Blog · Forms · Campaigns · Initiatives</div>
             </div>
 
             <div class="s8-box s8-box-api">
               <div class="s8-box-hd">
                 <img src="img/logo-kalida-connect.jpg" class="s8-box-icon s8-icon-round" alt="Kālida Connect">
                 <div class="s8-box-name">Kālida Connect API</div>
-                <span class="s8-srv-badge s8-badge-orange">Orquestador</span>
+                <span class="s8-srv-badge s8-badge-orange">Orchestrator</span>
               </div>
               <div class="s8-chips">
                 <span class="s8-chip hi">REST · JSON</span>
                 <span class="s8-chip hi">JWT Auth</span>
                 <span class="s8-chip hi">Webhooks</span>
-                <span class="s8-chip">Puerto 443</span>
+                <span class="s8-chip">Port 443</span>
               </div>
-              <div class="s8-box-note">Sincronización · Automatización · Centralización · Informes unificados</div>
+              <div class="s8-box-note">Synchronization · Automation · Centralization · Unified reporting</div>
             </div>
 
             <div class="s8-box s8-box-future">
               <div class="s8-box-hd">
                 <div class="s8-future-dot">+</div>
-                <div class="s8-box-name s8-box-name-dim">Nueva funcionalidad futura</div>
+                <div class="s8-box-name s8-box-name-dim">New future functionality</div>
                 <span class="s8-srv-badge s8-badge-dim">Roadmap</span>
               </div>
-              <div class="s8-box-note">Módulos adicionales conectados vía Kālida Connect API — analítica avanzada, automatización de comunicaciones y reporting unificado entre centros.</div>
+              <div class="s8-box-note">Additional modules connected via the Kālida Connect API — advanced analytics, communication automation, and unified reporting across centers.</div>
             </div>
           </div>
 
         </div>
 
-        <!-- Divider hacia clientes -->
+        <!-- Divider toward clients -->
         <div class="s8-bridge">
           <div class="s8-bridge-line"></div>
-          <div class="s8-bridge-label">↓ &nbsp; Dispositivos y clientes conectados vía Kālida Connect API &nbsp; ↓</div>
+          <div class="s8-bridge-label">↓ &nbsp; Devices and clients connected via the Kālida Connect API &nbsp; ↓</div>
           <div class="s8-bridge-line"></div>
         </div>
 
-        <!-- Clientes / endpoints finales -->
+        <!-- Clients / final endpoints -->
         <div class="s8-clients">
 
           <div class="s8-client">
             <div class="s8-client-hd">
               <div class="s8-client-dot s8-dot-active"></div>
-              <div class="s8-client-name">Centro Físico 1 · Barcelona</div>
+              <div class="s8-client-name">Physical Center 1 · Barcelona</div>
             </div>
-            <div class="s8-client-sub">Activo · Integración completa</div>
+            <div class="s8-client-sub">Active · Full integration</div>
             <div class="s8-client-chips">
               <span class="s8-chip">HTTPS</span>
-              <span class="s8-chip">Aforo en tiempo real</span>
-              <span class="s8-chip">Registros</span>
-              <span class="s8-chip">Informes</span>
+              <span class="s8-chip">Real-time capacity</span>
+              <span class="s8-chip">Records</span>
+              <span class="s8-chip">Reports</span>
             </div>
           </div>
 
           <div class="s8-client">
             <div class="s8-client-hd">
               <div class="s8-client-dot s8-dot-pending"></div>
-              <div class="s8-client-name">Centro Físico 2 · Granollers</div>
+              <div class="s8-client-name">Physical Center 2 · Granollers</div>
             </div>
-            <div class="s8-client-sub">En integración · Apertura 2028</div>
+            <div class="s8-client-sub">Integrating · Opening 2028</div>
             <div class="s8-client-chips">
               <span class="s8-chip">HTTPS</span>
-              <span class="s8-chip">Aforo en tiempo real</span>
-              <span class="s8-chip">Registros</span>
-              <span class="s8-chip">Informes</span>
+              <span class="s8-chip">Real-time capacity</span>
+              <span class="s8-chip">Records</span>
+              <span class="s8-chip">Reports</span>
             </div>
           </div>
 
           <div class="s8-client s8-client-future">
             <div class="s8-client-hd">
               <div class="s8-client-dot s8-dot-future"></div>
-              <div class="s8-client-name">App Móvil</div>
-              <span class="s8-srv-badge s8-badge-dim">Futuro</span>
+              <div class="s8-client-name">Mobile App</div>
+              <span class="s8-srv-badge s8-badge-dim">Future</span>
             </div>
             <div class="s8-client-sub">iOS · Android · 2027</div>
             <div class="s8-client-chips">
               <span class="s8-chip">OAuth 2.0</span>
               <span class="s8-chip">Push Notifications</span>
-              <span class="s8-chip">Impacto directo</span>
+              <span class="s8-chip">Direct impact</span>
             </div>
           </div>
 
@@ -3463,13 +3463,13 @@
       </div>
     </div>
 
-    <!-- ─── SLIDE 9: LAS FASES DEL PROYECTO ─── -->
+    <!-- ─── SLIDE 9: PROJECT PHASES ─── -->
     <div class="slide" id="slide-8">
       <div class="s9-wrap">
 
         <div class="s9-hd">
-          <div class="s9-eyebrow">Plan de Ejecución · 2026 — 2028</div>
-          <div class="s9-title">Las fases del proyecto</div>
+          <div class="s9-eyebrow">Execution Plan · 2026 — 2028</div>
+          <div class="s9-title">The project phases</div>
         </div>
 
         <div class="s9-timeline">
@@ -3478,113 +3478,113 @@
 
           <div class="s9-phases">
 
-            <!-- Fase 0 -->
+            <!-- Phase 0 -->
             <div class="s9-phase" id="s9ph0">
               <div class="s9-node">0</div>
               <div class="s9-gap"></div>
               <div class="s9-card" data-n="0">
-                <div class="s9-phase-lbl">Fase 0</div>
-                <div class="s9-phase-name">Liderazgo & BI</div>
+                <div class="s9-phase-lbl">Phase 0</div>
+                <div class="s9-phase-name">Leadership & BI</div>
                 <div class="s9-phase-date">2026 · Q3</div>
                 <ul class="s9-items">
-                  <li class="s9-item">Perfil BI / Project Lead</li>
-                  <li class="s9-item">Auditoría datos en Sinergia</li>
-                  <li class="s9-item">KPIs de impacto y reporting</li>
-                  <li class="s9-item">Gobernanza y arquitectura</li>
+                  <li class="s9-item">BI / Project Lead profile</li>
+                  <li class="s9-item">Data audit in Sinergia</li>
+                  <li class="s9-item">Impact KPIs and reporting</li>
+                  <li class="s9-item">Governance and architecture</li>
                 </ul>
               </div>
             </div>
 
-            <!-- Fase 1 -->
+            <!-- Phase 1 -->
             <div class="s9-phase" id="s9ph1">
               <div class="s9-node">1</div>
               <div class="s9-gap"></div>
               <div class="s9-card" data-n="1">
-                <div class="s9-phase-lbl">Fase 1</div>
-                <div class="s9-phase-name">API + Integración</div>
+                <div class="s9-phase-lbl">Phase 1</div>
+                <div class="s9-phase-name">API + Integration</div>
                 <div class="s9-phase-date">2026 · Q4</div>
                 <ul class="s9-items">
-                  <li class="s9-item">Construcción Kālida Connect API</li>
-                  <li class="s9-item">Integración Sinergia ↔ WordPress</li>
-                  <li class="s9-item">Publicación automática actividades</li>
-                  <li class="s9-item">Webhooks y documentación</li>
+                  <li class="s9-item">Building the Kālida Connect API</li>
+                  <li class="s9-item">Sinergia ↔ WordPress integration</li>
+                  <li class="s9-item">Automatic activity publishing</li>
+                  <li class="s9-item">Webhooks and documentation</li>
                 </ul>
               </div>
             </div>
 
-            <!-- Fase 2 -->
+            <!-- Phase 2 -->
             <div class="s9-phase" id="s9ph2">
               <div class="s9-node">2</div>
               <div class="s9-gap"></div>
               <div class="s9-card" data-n="2">
-                <div class="s9-phase-lbl">Fase 2</div>
-                <div class="s9-phase-name">Nueva Web</div>
+                <div class="s9-phase-lbl">Phase 2</div>
+                <div class="s9-phase-name">New Website</div>
                 <div class="s9-phase-date">2027 · Q1</div>
                 <ul class="s9-items">
-                  <li class="s9-item">Rediseño web completo</li>
-                  <li class="s9-item">Nueva experiencia de usuario</li>
-                  <li class="s9-item">Integración total con la API</li>
-                  <li class="s9-item">Tienda, Agenda y Blog unificados</li>
+                  <li class="s9-item">Complete website redesign</li>
+                  <li class="s9-item">New user experience</li>
+                  <li class="s9-item">Full integration with the API</li>
+                  <li class="s9-item">Unified Shop, Calendar and Blog</li>
                 </ul>
               </div>
             </div>
 
-            <!-- Fase 3 -->
+            <!-- Phase 3 -->
             <div class="s9-phase" id="s9ph3">
               <div class="s9-node">3</div>
               <div class="s9-gap"></div>
               <div class="s9-card" data-n="3">
-                <div class="s9-phase-lbl">Fase 3</div>
-                <div class="s9-phase-name">Automatizaciones</div>
+                <div class="s9-phase-lbl">Phase 3</div>
+                <div class="s9-phase-name">Automations</div>
                 <div class="s9-phase-date">2027 · Q1–Q2</div>
                 <ul class="s9-items">
-                  <li class="s9-item">Aforo y registros en tiempo real</li>
-                  <li class="s9-item">Dashboard BI para donantes</li>
-                  <li class="s9-item">Comunicaciones automáticas</li>
-                  <li class="s9-item">Reporting unificado por centros</li>
+                  <li class="s9-item">Real-time capacity and records</li>
+                  <li class="s9-item">BI dashboard for donors</li>
+                  <li class="s9-item">Automated communications</li>
+                  <li class="s9-item">Unified reporting by center</li>
                 </ul>
               </div>
             </div>
 
-            <!-- Fase 4 — Opcional -->
+            <!-- Phase 4 — Optional -->
             <div class="s9-phase s9-phase-opt" id="s9ph4">
               <div class="s9-node">4</div>
               <div class="s9-gap"></div>
               <div class="s9-card" data-n="4">
-                <div class="s9-phase-lbl">Fase 4</div>
-                <div class="s9-phase-name">App Móvil</div>
-                <div class="s9-phase-date">Opcional · 2027+</div>
+                <div class="s9-phase-lbl">Phase 4</div>
+                <div class="s9-phase-name">Mobile App</div>
+                <div class="s9-phase-date">Optional · 2027+</div>
                 <ul class="s9-items">
-                  <li class="s9-item">App pacientes y cuidadores</li>
-                  <li class="s9-item">Agenda, inscripciones y push</li>
-                  <li class="s9-item">Extensión a Granollers</li>
-                  <li class="s9-item">Base futuros centros Kālida</li>
+                  <li class="s9-item">App for patients and caregivers</li>
+                  <li class="s9-item">Calendar, registrations and push notifications</li>
+                  <li class="s9-item">Extension to Granollers</li>
+                  <li class="s9-item">Groundwork for future Kālida centers</li>
                 </ul>
-                <div class="s9-badge-opt">No comprometida</div>
+                <div class="s9-badge-opt">Not committed</div>
               </div>
             </div>
 
           </div>
         </div>
 
-        <div class="s9-foot">Cada fase entrega valor independiente · La inversión puede estructurarse por etapas</div>
+        <div class="s9-foot">Each phase delivers independent value · Investment can be structured in stages</div>
 
       </div>
     </div>
 
   </div>
 
-  <!-- SLIDE 10: CIERRE -->
+  <!-- SLIDE 10: CLOSING -->
   <div class="slide" id="slide-9">
     <div class="s10-wrap">
 
-      <!-- Halo ambiental -->
+      <!-- Ambient halo -->
       <div class="s10-glow"></div>
 
       <!-- Logos -->
       <div class="s10-logos">
         <div class="s10-logo-kalida">
-          <img src="img/KALIDA2_RGB.png" alt="Fundació Kālida">
+          <img src="img/KALIDA2_RGB.png" alt="Kālida Foundation">
         </div>
         <div class="s10-sep">
           <div class="s10-sep-line"></div>
@@ -3596,18 +3596,18 @@
         </div>
       </div>
 
-      <!-- Titular -->
+      <!-- Headline -->
       <div class="s10-headline">
-        La tecnología no reemplaza el cuidado.<br>
-        <span class="s10-hl-accent">Lo multiplica.</span>
+        Technology doesn't replace care.<br>
+        <span class="s10-hl-accent">It multiplies it.</span>
       </div>
 
-      <!-- Frase estratégica -->
+      <!-- Strategic statement -->
       <div class="s10-subline">
-        Una inversión en infraestructura digital es una inversión en acompañamiento a escala.
+        An investment in digital infrastructure is an investment in support at scale.
       </div>
 
-      <!-- Línea decorativa -->
+      <!-- Decorative line -->
       <div class="s10-divider"></div>
 
       <!-- CTAs -->
@@ -3616,14 +3616,14 @@
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
           fundaciokalida.org
         </a>
-        <a href="mailto:info@fundaciokalida.org?subject=Kālida Connect — Solicitud de propuesta técnica" class="s10-btn s10-btn-outline">
+        <a href="mailto:info@fundaciokalida.org?subject=Kālida Connect — Technical Proposal Request" class="s10-btn s10-btn-outline">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          Solicitar propuesta técnica
+          Request technical proposal
         </a>
       </div>
 
-      <!-- Pie -->
-      <div class="s10-footer">2026 · Propuesta confidencial · Fundació Kālida</div>
+      <!-- Footer -->
+      <div class="s10-footer">2026 · Confidential proposal · Kālida Foundation</div>
 
     </div>
   </div>
@@ -3633,7 +3633,7 @@
     <div class="nav-arrows">
       <div class="narr prev-btn">←</div>
     </div>
-    <div class="nav-hint" id="nav-hint-text">Avanza para descubrir <span class="nh-arrow">→</span></div>
+    <div class="nav-hint" id="nav-hint-text">Move forward to discover <span class="nh-arrow">→</span></div>
     <div class="nav-dots" id="nav-dots-container">
     </div>
     <div class="nav-arrows">
@@ -3642,16 +3642,16 @@
     <img src="img/logo-connect-blanco.png" alt="Kālida Connect" class="nav-logo-right" id="nav-logo-right">
   </div>
 
-  <!-- Toast: maximizar ventana -->
+  <!-- Toast: maximize window -->
   <div class="toast-hint" id="toast-hint">
-    <span class="toast-msg">Para una mejor experiencia, <strong>maximiza esta ventana</strong></span>
-    <span class="toast-msg">Puede usar las flechas izquierda o derecha para <strong>adelante o atras</strong></span>
+    <span class="toast-msg">For a better experience, <strong>maximize this window</strong></span>
+    <span class="toast-msg">You can use the left or right arrow keys to go <strong>forward or back</strong></span>
     <button class="toast-ok" id="toast-ok">OK</button>
   </div>
 
   <script>
     /* =======================================================
-       1. LÓGICA GLOBAL DEL SLIDER PRINCIPAL
+       1. MAIN SLIDER GLOBAL LOGIC
        ======================================================= */
     const slides = document.querySelectorAll('.slide');
     const dotsContainer = document.getElementById('nav-dots-container');
@@ -3661,23 +3661,23 @@
     const navLogo      = document.getElementById('nav-logo');
     const navLogoRight = document.getElementById('nav-logo-right');
 
-   // Textos personalizados para la barra de navegación de cada slide
+   // Custom navigation bar texts for each slide
     const navTexts = [
-      'Avanza para descubrir',
-      'Ecosistema digital · Slide 2',
+      'Move forward to discover',
+      'Digital Ecosystem · Slide 2',
       'Sinergia · Slide 3',
-      'Operativa Actual · Slide 4',
-      'Escalabilidad · Slide 5',
+      'Current Operations · Slide 4',
+      'Scalability · Slide 5',
       'Kālida Connect · Slide 6',
       'API Architecture · Slide 7',
-      'Infraestructura Técnica · Slide 8',
-      'Fases del Proyecto · Slide 9',
-      'Cierre · Slide 10'
+      'Technical Infrastructure · Slide 8',
+      'Project Phases · Slide 9',
+      'Closing · Slide 10'
     ];
 
     let currentSlide = 0;
 
-    // Generar dots dinámicamente según la cantidad de slides
+    // Dynamically generate dots based on the number of slides
     slides.forEach((_, i) => {
       const dot = document.createElement('div');
       dot.className = 'ndot' + (i === 0 ? ' on' : '');
@@ -3693,17 +3693,17 @@
       if (index < 0) index = slides.length - 1;
       if (index >= slides.length) index = 0;
 
-      // Slide 2: parar ciclo al salir, reiniciar desde 0 al entrar
+      // Slide 2: stop cycle on exit, restart from 0 on entry
       if (currentSlide === 1 && index !== 1) { clearInterval(timer); timer = null; }
       if (index === 1) { startSlide2(); }
 
-      // Slide 9: ciclo de highlight por fases
+      // Slide 9: phase highlight cycle
       if (currentSlide === 8 && index !== 8) { clearInterval(s9Timer); s9Timer = null; }
       if (index === 8) { setTimeout(startSlide9, 1600); }
 
       slides.forEach((slide, i) => {
         slide.classList.remove('active', 'prev-slide');
-        // Para que la animación sepa de dónde viene el slide (derecha o izquierda)
+        // So the animation knows which direction the slide comes from (right or left)
         if (i < index) {
           slide.classList.add('prev-slide');
         }
@@ -3712,10 +3712,10 @@
       slides[index].classList.add('active');
       currentSlide = index;
 
-      // Fondo oscuro en body solo en slide 7 (fondo #07111e) para cubrir gap de nav colapsada
+      // Dark background on body only on slide 7 (#07111e background) to cover the collapsed nav gap
       document.body.classList.toggle('s7-active', index >= 6 && index <= 8);
 
-      // Actualizar UI de navegación
+      // Update navigation UI
       dots.forEach((dot, i) => dot.classList.toggle('on', i === index));
       navHint.innerHTML = `${navTexts[index]} <span class="nh-arrow">→</span>`;
       navLogo.classList.toggle('visible', index >= 1);
@@ -3725,7 +3725,7 @@
         setTimeout(() => navLogoRight.classList.add('visible'), 350);
       }
 
-      // Lógica del vídeo Kālida Connect (slide 6, índice 5)
+      // Kālida Connect video logic (slide 6, index 5)
       if (index === 5) {
         kcTagline.classList.remove('visible');
         if (kcVideo.style.display !== 'none') {
@@ -3750,18 +3750,18 @@
     btnPrev.addEventListener('click', () => goToSlide(currentSlide - 1));
     btnNext.addEventListener('click', () => goToSlide(currentSlide + 1));
 
-    /* Navegación por teclado (Flechas) */
+    /* Keyboard navigation (Arrow keys) */
     document.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowRight') goToSlide(currentSlide + 1);
       if (e.key === 'ArrowLeft') goToSlide(currentSlide - 1);
     });
 
-    /* Nav bar: colapsar tras la animación de entrada (1.6s anim + 0.9s margen) */
+    /* Nav bar: collapse after the entry animation (1.6s anim + 0.9s margin) */
     const navBar = document.querySelector('.nav-bar');
     setTimeout(() => navBar.classList.add('collapsed'), 2500);
 
     /* =======================================================
-       LÓGICA SLIDE 6: KĀLIDA CONNECT VIDEO
+       SLIDE 6 LOGIC: KĀLIDA CONNECT VIDEO
        ======================================================= */
     const kcVideo   = document.getElementById('kc-video');
     const kcFallback = document.getElementById('kc-fallback');
@@ -3778,16 +3778,16 @@
     });
 
     /* =======================================================
-       2. LÓGICA ESPECÍFICA DEL SLIDE 2 (Ecosistema)
+       2. SLIDE 2 SPECIFIC LOGIC (Ecosystem)
        ======================================================= */
     const MODULES = [
-      { num: '01', name: 'Kālida Online', desc: 'Comunidad cerrada · registro de usuarios y recursos digitales', img: 'img/kalida-online.jpg' },
-      { num: '02', name: 'Tienda Solidaria', desc: 'Productos solidarios gestionados con WooCommerce', img: 'img/shop.jpg' },
-      { num: '03', name: 'Agenda', desc: 'Talleres, actividades e inscripciones en tiempo real', img: 'img/agenda.jpg' },
-      { num: '04', name: 'Blog y Noticias', desc: 'Contenido editorial y artículos divulgativos', img: 'img/blog.jpg' },
-      { num: '05', name: 'Formularios de Donativos', desc: 'Captación de fondos y socios recurrentes', img: 'img/forms.jpg' },
-      { num: '06', name: 'Campañas', desc: 'Campañas de publicidad integradas en la plataforma', img: 'img/campaings.jpg' },
-      { num: '07', name: 'Iniciativas Solidarias', desc: 'Colaboración, voluntariado y captación de apoyo', img: 'img/initiatives.jpg' },
+      { num: '01', name: 'Kālida Online', desc: 'Closed community · user registration and digital resources', img: 'img/kalida-online.jpg' },
+      { num: '02', name: 'Charity Shop', desc: 'Charity products managed with WooCommerce', img: 'img/shop.jpg' },
+      { num: '03', name: 'Calendar', desc: 'Workshops, activities and real-time registrations', img: 'img/agenda.jpg' },
+      { num: '04', name: 'Blog and News', desc: 'Editorial content and informational articles', img: 'img/blog.jpg' },
+      { num: '05', name: 'Donation Forms', desc: 'Fundraising and recurring member acquisition', img: 'img/forms.jpg' },
+      { num: '06', name: 'Campaigns', desc: 'Advertising campaigns integrated into the platform', img: 'img/campaings.jpg' },
+      { num: '07', name: 'Solidarity Initiatives', desc: 'Collaboration, volunteering and support outreach', img: 'img/initiatives.jpg' },
     ];
 
     const INTERVAL = 3500;
@@ -3800,7 +3800,7 @@
     const progressEl = document.getElementById('progress-bar');
 
     MODULES.forEach((mod, i) => {
-      // Lista
+      // List
       const item = document.createElement('div');
       item.className = 'module-item';
       item.innerHTML = `<div class="module-row"><span class="module-num">${mod.num}</span><span class="module-name">${mod.name}</span></div><div class="module-desc">${mod.desc}</div>`;
@@ -3808,13 +3808,13 @@
       item.addEventListener('mouseleave', () => { hovered = false; resumeTimer(); });
       listEl.appendChild(item);
 
-      // Slots del navegador
+      // Browser slots
       const slot = document.createElement('div');
       slot.className = 'img-slot';
       if (mod.img) {
         slot.innerHTML = `<img src="${mod.img}" alt="${mod.name}">`;
       } else {
-        slot.innerHTML = `<div class="img-ph"><div class="iph-num">${mod.num}</div><div class="iph-name">${mod.name}</div><div class="iph-hint">Añade img: 'img/archivo.jpg'</div></div>`;
+        slot.innerHTML = `<div class="img-ph"><div class="iph-num">${mod.num}</div><div class="iph-name">${mod.name}</div><div class="iph-hint">Add img: 'img/file.jpg'</div></div>`;
       }
       screenEl.appendChild(slot);
     });
@@ -3853,7 +3853,7 @@
     function pauseProgress() { progressEl.style.animationPlayState = 'paused'; clearInterval(timer); }
     function resumeTimer() { restartProgress(); clearInterval(timer); timer = setInterval(step, INTERVAL); }
 
-    // Todos visibles desde el inicio; el ciclo arranca solo al entrar al slide
+    // All visible from the start; the cycle only starts when entering the slide
     allItems().forEach(el => el.classList.add('visible'));
 
     function startSlide2() {
@@ -3864,10 +3864,10 @@
       timer = setInterval(step, INTERVAL);
     }
 
-    /* Slide 9 — ciclo de fases */
+    /* Slide 9 — phase cycle */
     let s9Timer = null;
     let s9Idx   = 0;
-    const S9_CORE = 4; // fases 0-3 en ciclo (fase 4 opcional, no entra en el ciclo)
+    const S9_CORE = 4; // phases 0-3 cycle (phase 4 is optional, not included in the cycle)
 
     function setS9Hi(idx) {
       document.querySelectorAll('.s9-phase').forEach((el, i) => {
@@ -3885,7 +3885,7 @@
       }, 2800);
     }
 
-    /* Toast — maximizar ventana */
+    /* Toast — maximize window */
     (function () {
       const toast  = document.getElementById('toast-hint');
       const toastOk = document.getElementById('toast-ok');
