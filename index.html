@@ -1,0 +1,3910 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fundació Kālida · Transformación Digital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <style>
+    /* ═══ VARIABLES GLOBALES ═══ */
+    :root {
+      --salmon: #E8735A;
+      --navy: #1C3554;
+      --mid: #6B7A8D;
+      --light: #A0AABB;
+      --white: #FFFFFF;
+      --n06: rgba(28, 53, 84, .06);
+      --n08: rgba(28, 53, 84, .08);
+      --n15: rgba(28, 53, 84, .15);
+      --n35: rgba(28, 53, 84, .35);
+      --n55: rgba(28, 53, 84, .55);
+      --sphere: clamp(190px, 26vmin, 350px);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      background: var(--white);
+      font-family: 'Gotham Rounded', Verdana, sans-serif;
+      overflow: hidden;
+    }
+
+    /* ═══ CONTENEDOR DE SLIDES Y TRANSICIONES ═══ */
+    #slider-container {
+      position: relative;
+      width: 100vw;
+      height: calc(100vh - 56px);
+      /* Espacio exacto para la nav-bar */
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100%;
+      opacity: 0;
+      visibility: hidden;
+      /* Transición inicial (cuando entra desde la derecha) */
+      transform: translateX(6vw) scale(0.97);
+      transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1),
+        transform 0.8s cubic-bezier(0.25, 1, 0.5, 1),
+        visibility 0.8s;
+      z-index: 1;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0) scale(1);
+      z-index: 10;
+    }
+
+    .slide.prev-slide {
+      /* Transición de salida (cuando se va hacia la izquierda) */
+      transform: translateX(-6vw) scale(0.97);
+    }
+
+    /* ═══ ANIMACIONES GLOBALES (Solo corren si el slide es activo) ═══ */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* =========================================
+       SLIDE 1: PORTADA
+       ========================================= */
+    .s1-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    .slide.active .logo-wrap {
+      animation: fadeDown .8s cubic-bezier(.2, 0, .2, 1) .1s forwards;
+      opacity: 0;
+      margin-bottom: 5vh;
+    }
+
+    .slide.active .rule {
+      animation: growRule .6s cubic-bezier(.4, 0, .2, 1) .7s forwards;
+      width: 0;
+      height: 2px;
+      background: var(--salmon);
+      border-radius: 2px;
+      margin-bottom: 4.5vh;
+    }
+
+    @keyframes growRule {
+      to {
+        width: 3.5vw;
+      }
+    }
+
+    .foundation {
+      font-size: 1.28vw;
+      font-weight: 700;
+      letter-spacing: .22em;
+      color: var(--salmon);
+      margin-bottom: 2vh;
+      opacity: 0;
+    }
+
+    .slide.active .foundation {
+      animation: fadeUp .6s ease .85s forwards;
+    }
+
+    .s1-title {
+      font-size: 4.48vw;
+      font-weight: 800;
+      letter-spacing: -.02em;
+      line-height: 1.1;
+      color: var(--navy);
+      text-align: center;
+      margin-bottom: 3.5vh;
+      opacity: 0;
+    }
+
+    .slide.active .s1-title {
+      animation: fadeUp .7s cubic-bezier(.2, 0, .2, 1) 1s forwards;
+    }
+
+    .date-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 1.2vw;
+      border: 1px solid rgba(0, 0, 0, .1);
+      border-radius: 100px;
+      padding: .75vh 2vw;
+      font-size: 1.28vw;
+      font-weight: 600;
+      letter-spacing: .1em;
+      color: var(--light);
+      opacity: 0;
+    }
+
+    .date-badge .year {
+      color: var(--mid);
+    }
+
+    .date-badge .sep {
+      color: rgba(0, 0, 0, .12);
+    }
+
+    .slide.active .date-badge {
+      animation: fadeUp .6s ease 1.2s forwards;
+    }
+
+    /* =========================================
+       SLIDE 2: ECOSISTEMA
+       ========================================= */
+    .s2-wrap {
+      display: flex;
+      width: 100%;
+      height: 100%;
+    }
+
+    .s2-left {
+      width: 44%;
+      flex-shrink: 0;
+      padding: 7vh 3vw 5vh 7.5vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .s2-right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4.5vh 4vw 4.5vh 2.5vw;
+      position: relative;
+    }
+
+    .tag {
+      font-size: 1.1vw;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--salmon);
+      margin-bottom: 1.4vh;
+      opacity: 0;
+    }
+
+    .slide.active .tag {
+      animation: fadeUp .5s ease .05s forwards;
+    }
+
+    .s2-title {
+      font-size: 3.42vw;
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.1;
+      letter-spacing: -.02em;
+      margin-bottom: 1.1vh;
+      opacity: 0;
+    }
+
+    .slide.active .s2-title {
+      animation: fadeUp .5s ease .15s forwards;
+    }
+
+    .s2-sub {
+      font-size: 1.39vw;
+      font-weight: 400;
+      color: var(--n35);
+      line-height: 1.65;
+      max-width: 34ch;
+      margin-bottom: 2.5vh;
+      opacity: 0;
+    }
+
+    .slide.active .s2-sub {
+      animation: fadeUp .5s ease .25s forwards;
+    }
+
+    .module-list {
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid var(--n08);
+      opacity: 0;
+    }
+
+    .slide.active .module-list {
+      animation: fadeUp .5s ease .3s forwards;
+    }
+
+    .module-item {
+      display: flex;
+      flex-direction: column;
+      padding: 1.25vh 0 1.25vh 1.6vw;
+      border-bottom: 1px solid var(--n08);
+      cursor: default;
+      position: relative;
+      opacity: 0;
+      transform: translateX(-12px);
+      transition: opacity .4s ease, transform .4s ease;
+    }
+
+    .module-item.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .module-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 18%;
+      bottom: 18%;
+      width: 2.5px;
+      background: var(--salmon);
+      border-radius: 2px;
+      opacity: 0;
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: opacity .3s, transform .35s cubic-bezier(.2, .8, .3, 1.2);
+    }
+
+    .module-item.active::before {
+      opacity: 1;
+      transform: scaleY(1);
+    }
+
+    .module-row {
+      display: flex;
+      align-items: baseline;
+      gap: 1vw;
+    }
+
+    .module-num {
+      font-size: 1.01vw;
+      font-weight: 800;
+      letter-spacing: .1em;
+      color: var(--n35);
+      flex-shrink: 0;
+      width: 2vw;
+      transition: color .3s;
+    }
+
+    .module-item.active .module-num {
+      color: var(--salmon);
+    }
+
+    .module-name {
+      font-size: 1.37vw;
+      font-weight: 700;
+      color: var(--n35);
+      line-height: 1.2;
+      transition: color .3s, font-size .3s;
+    }
+
+    .module-item.active .module-name {
+      color: var(--navy);
+      font-size: 1.49vw;
+    }
+
+    .module-desc {
+      font-size: 1.13vw;
+      font-weight: 400;
+      color: var(--n55);
+      padding-left: 3vw;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height .4s ease, opacity .35s ease, margin-top .3s ease;
+    }
+
+    .module-item.active .module-desc {
+      max-height: 5vh;
+      opacity: 1;
+      margin-top: .5vh;
+    }
+
+    .browser-wrap {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1.8vh;
+      opacity: 0;
+    }
+
+    .slide.active .browser-wrap {
+      animation: fadeUp .6s ease .2s forwards;
+    }
+
+    .progress-bar {
+      width: 0;
+      height: 2px;
+      background: var(--salmon);
+      border-radius: 2px;
+      align-self: flex-start;
+    }
+
+    .progress-bar.running {
+      animation: fillBar 3.5s linear forwards;
+    }
+
+    @keyframes fillBar {
+      from {
+        width: 0;
+      }
+
+      to {
+        width: 100%;
+      }
+    }
+
+    .browser {
+      background: #1e1e1e;
+      border-radius: 11px;
+      overflow: hidden;
+      box-shadow: 0 22px 55px rgba(28, 53, 84, .16), 0 4px 14px rgba(28, 53, 84, .08), 0 0 0 1px rgba(28, 53, 84, .07);
+      width: 100%;
+    }
+
+    .b-bar {
+      background: #272727;
+      height: 31px;
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .b-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+    }
+
+    .b-r {
+      background: #FF5F57;
+    }
+
+    .b-y {
+      background: #FEBC2E;
+    }
+
+    .b-g {
+      background: #28C840;
+    }
+
+    .b-url {
+      margin-left: 8px;
+      flex: 1;
+      height: 17px;
+      background: rgba(255, 255, 255, .07);
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      padding: 0 8px;
+      font-size: 0.7vw;
+      color: rgba(255, 255, 255, .28);
+      letter-spacing: .02em;
+    }
+
+    .b-screen {
+      aspect-ratio: 16/9;
+      background: #111;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .img-slot {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity .6s ease;
+    }
+
+    .img-slot.active {
+      opacity: 1;
+      z-index: 2;
+    }
+
+    .img-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .img-ph {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5vh;
+      background: #161616;
+    }
+
+    .iph-num {
+      font-size: 5.4vw;
+      font-weight: 900;
+      color: rgba(255, 255, 255, .05);
+      line-height: 1;
+      letter-spacing: -.04em;
+    }
+
+    .iph-name {
+      font-size: 1.16vw;
+      font-weight: 700;
+      color: rgba(255, 255, 255, .3);
+      letter-spacing: .04em;
+    }
+
+    .iph-hint {
+      font-size: 0.8vw;
+      color: rgba(255, 255, 255, .15);
+      border: 1px dashed rgba(255, 255, 255, .1);
+      border-radius: 5px;
+      padding: .5vh 1.2vw;
+    }
+
+    .browser-label {
+      display: flex;
+      align-items: center;
+      gap: 1vw;
+      padding-left: .2vw;
+    }
+
+    .bl-num {
+      font-size: 1.04vw;
+      font-weight: 800;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--salmon);
+    }
+
+    .bl-sep {
+      width: 1px;
+      height: 1em;
+      background: var(--n15);
+    }
+
+    .bl-name {
+      font-size: 1.36vw;
+      font-weight: 700;
+      color: var(--navy);
+      opacity: .7;
+    }
+
+    /* =========================================
+       SLIDE 3: SINERGIA
+       ========================================= */
+    .s3-wrap {
+      display: flex;
+      align-items: stretch;
+      width: 100%;
+      height: 100%;
+    }
+
+    .s3-left {
+      width: 38%;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 5vh 1vw 5vh 5vw;
+    }
+
+    .s3-right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8vh 6vw 8vh 1vw;
+    }
+
+    .sphere-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2.5vh;
+    }
+
+    .sphere-stage {
+      width: var(--sphere);
+      height: var(--sphere);
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .slide.active .ring-1 {
+      border: 1.5px solid rgba(232, 115, 90, .55);
+      animation: ringIn .75s ease-out .00s both;
+    }
+
+    .slide.active .ring-2 {
+      border: 1px solid rgba(28, 53, 84, .30);
+      animation: ringIn .75s ease-out .10s both;
+    }
+
+    .slide.active .ring-3 {
+      border: 1px solid rgba(232, 115, 90, .28);
+      animation: ringIn .75s ease-out .20s both;
+    }
+
+    .slide.active .ring-4 {
+      border: 1.5px solid rgba(28, 53, 84, .15);
+      animation: ringIn .75s ease-out .30s both;
+    }
+
+    @keyframes ringIn {
+      from {
+        transform: scale(2.4);
+        opacity: .85;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 0;
+      }
+    }
+
+    .sphere {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      overflow: hidden;
+      background: radial-gradient(circle at 40% 35%, #2d4e80 0%, #1b3360 40%, #0e1e3c 75%, #07111f 100%);
+      box-shadow: 0 0 0 1.5px rgba(255, 255, 255, .13), 0 0 50px rgba(232, 115, 90, .16), 0 28px 70px rgba(6, 12, 24, .52), 0 8px 22px rgba(6, 12, 24, .28);
+      opacity: 0;
+    }
+
+    .slide.active .sphere {
+      animation: sphereIn .88s cubic-bezier(.34, 1.56, .64, 1) .18s both;
+    }
+
+    @keyframes sphereIn {
+      0% {
+        transform: scale(0) rotate(-10deg);
+        opacity: 0;
+        filter: blur(16px);
+      }
+
+      100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+        filter: blur(0);
+      }
+    }
+
+    .sphere-glow {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: radial-gradient(ellipse 50% 50% at 65% 72%, rgba(232, 115, 90, .13) 0%, transparent 65%);
+      z-index: 1;
+      animation: glowSpin 10s linear infinite;
+    }
+
+    @keyframes glowSpin {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .sphere-browser {
+      position: absolute;
+      top: 13%;
+      left: 11%;
+      right: 11%;
+      bottom: 13%;
+      border-radius: 5px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 3px 18px rgba(0, 0, 0, .65);
+      z-index: 2;
+      opacity: 0;
+    }
+
+    .slide.active .sphere-browser {
+      animation: browserIn .5s ease .98s both;
+    }
+
+    @keyframes browserIn {
+      from {
+        opacity: 0;
+        transform: scale(.86) translateY(5px);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .sb-bar {
+      background: #242424;
+      height: 15%;
+      display: flex;
+      align-items: center;
+      padding: 0 7%;
+      gap: 4.5%;
+      flex-shrink: 0;
+    }
+
+    .sb-dot {
+      aspect-ratio: 1/1;
+      height: 28%;
+      border-radius: 50%;
+    }
+
+    .sb-r {
+      background: #FF5F57;
+    }
+
+    .sb-y {
+      background: #FEBC2E;
+    }
+
+    .sb-g {
+      background: #28C840;
+    }
+
+    .sb-url {
+      flex: 1;
+      height: 50%;
+      background: rgba(255, 255, 255, .07);
+      border-radius: 3px;
+      margin-left: 5%;
+    }
+
+    .sb-screen {
+      flex: 1;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      background: #f4f1ee;
+    }
+
+    .sw-nav {
+      height: 14%;
+      background: var(--salmon);
+      flex-shrink: 0;
+    }
+
+    .sw-hero {
+      height: 32%;
+      background: var(--white);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 5%;
+      padding: 5% 7%;
+    }
+
+    .sw-htx {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 11%;
+    }
+
+    .sw-h1 {
+      height: 23%;
+      background: var(--navy);
+      border-radius: 2px;
+      opacity: .88;
+    }
+
+    .sw-h2 {
+      height: 15%;
+      background: var(--navy);
+      border-radius: 2px;
+      opacity: .32;
+      width: 72%;
+    }
+
+    .sw-h3 {
+      height: 19%;
+      background: var(--salmon);
+      border-radius: 2px;
+      opacity: .72;
+      width: 38%;
+    }
+
+    .sw-himg {
+      width: 36%;
+      height: 78%;
+      background: #ddd;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    .sw-grid {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4%;
+      padding: 5%;
+      background: #e8e4df;
+    }
+
+    .sw-card {
+      background: var(--white);
+      border-radius: 3px;
+      padding: 9%;
+      display: flex;
+      flex-direction: column;
+      gap: 10%;
+    }
+
+    .sw-ci {
+      height: 30%;
+      background: var(--salmon);
+      border-radius: 2px;
+      opacity: .62;
+    }
+
+    .sw-ct {
+      height: 12%;
+      background: var(--navy);
+      border-radius: 1px;
+      opacity: .48;
+    }
+
+    .sw-cd {
+      height: 9%;
+      background: #bbb;
+      border-radius: 1px;
+      width: 68%;
+    }
+
+    .sphere-glass {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10;
+      background: radial-gradient(ellipse 44% 30% at 27% 19%, rgba(255, 255, 255, .88) 0%, rgba(255, 255, 255, .32) 38%, transparent 65%), radial-gradient(ellipse 24% 17% at 75% 80%, rgba(255, 255, 255, .28) 0%, transparent 100%), radial-gradient(ellipse 92% 92% at 50% 50%, transparent 50%, rgba(5, 10, 22, .60) 100%), radial-gradient(ellipse 55% 34% at 50% 96%, rgba(232, 115, 90, .07) 0%, transparent 70%);
+    }
+
+    .sphere-rim {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255, 255, 255, .22);
+      pointer-events: none;
+      z-index: 11;
+      box-shadow: inset 0 0 28px rgba(255, 255, 255, .04);
+    }
+
+    .sphere-shimmer {
+      position: absolute;
+      width: 30%;
+      height: 9%;
+      top: 16%;
+      left: 25%;
+      background: rgba(255, 255, 255, .48);
+      border-radius: 50%;
+      filter: blur(5px);
+      pointer-events: none;
+      z-index: 12;
+      animation: shimmer 4.5s ease-in-out infinite .8s;
+    }
+
+    @keyframes shimmer {
+
+      0%,
+      100% {
+        opacity: .48;
+        transform: rotate(-8deg) scale(1);
+      }
+
+      50% {
+        opacity: .90;
+        transform: rotate(-5deg) scale(1.08);
+      }
+    }
+
+    .sphere-label {
+      font-size: 1.1vw;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--n35);
+      opacity: 0;
+    }
+
+    .slide.active .sphere-label {
+      animation: fadeUp .5s ease 1.3s forwards;
+    }
+
+    .connector {
+      width: 11vw;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: center;
+      gap: 2vh;
+      padding: 0 .8vw;
+      opacity: 0;
+    }
+
+    .slide.active .connector {
+      animation: fadeIn .5s ease 1.1s forwards;
+    }
+
+    .channel {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: .55vh;
+    }
+
+    .ch-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 .1vw;
+    }
+
+    .ch-from,
+    .ch-to {
+      font-size: 0.84vw;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .ch-arrow {
+      font-size: 1.19vw;
+      line-height: 1;
+    }
+
+    .channel-fwd .ch-from,
+    .channel-fwd .ch-to,
+    .channel-fwd .ch-arrow {
+      color: var(--salmon);
+    }
+
+    .channel-bwd .ch-from,
+    .channel-bwd .ch-to,
+    .channel-bwd .ch-arrow {
+      color: var(--navy);
+      opacity: .55;
+    }
+
+    .ch-track {
+      position: relative;
+      height: 1.5px;
+      border-radius: 2px;
+      overflow: visible;
+    }
+
+    .channel-fwd .ch-track {
+      background: rgba(232, 115, 90, .22);
+    }
+
+    .channel-bwd .ch-track {
+      background: rgba(28, 53, 84, .14);
+    }
+
+    .ch-track::before,
+    .ch-track::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+    }
+
+    .channel-fwd .ch-track::before {
+      left: 0;
+      background: var(--salmon);
+      opacity: .6;
+    }
+
+    .channel-fwd .ch-track::after {
+      right: 0;
+      background: var(--salmon);
+      opacity: .6;
+    }
+
+    .channel-bwd .ch-track::before {
+      left: 0;
+      background: var(--navy);
+      opacity: .4;
+    }
+
+    .channel-bwd .ch-track::after {
+      right: 0;
+      background: var(--navy);
+      opacity: .4;
+    }
+
+    .packet {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      opacity: 0;
+    }
+
+    .channel-fwd .packet {
+      background: var(--salmon);
+      box-shadow: 0 0 6px rgba(232, 115, 90, .7);
+      animation: packetRight 1.8s ease-in-out infinite;
+    }
+
+    .channel-bwd .packet {
+      background: var(--navy);
+      box-shadow: 0 0 6px rgba(28, 53, 84, .4);
+      animation: packetLeft 2.2s ease-in-out infinite;
+    }
+
+    .packet:nth-child(2) {
+      animation-delay: .6s;
+    }
+
+    .packet:nth-child(3) {
+      animation-delay: 1.2s;
+    }
+
+    @keyframes packetRight {
+      0% {
+        left: 0%;
+        opacity: 0;
+      }
+
+      8% {
+        opacity: 1;
+      }
+
+      88% {
+        opacity: 1;
+      }
+
+      100% {
+        left: 100%;
+        opacity: 0;
+      }
+    }
+
+    @keyframes packetLeft {
+      0% {
+        left: 100%;
+        opacity: 0;
+      }
+
+      8% {
+        opacity: 1;
+      }
+
+      88% {
+        opacity: 1;
+      }
+
+      100% {
+        left: 0%;
+        opacity: 0;
+      }
+    }
+
+    .ch-separator {
+      height: 1px;
+      background: var(--n06);
+      border-radius: 1px;
+    }
+
+    .s3-title {
+      font-size: 4.01vw;
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.05;
+      letter-spacing: -.025em;
+      margin-bottom: 1.5vh;
+      opacity: 0;
+    }
+
+    .slide.active .s3-title {
+      animation: fadeUp .5s ease .75s forwards;
+    }
+
+    .s3-sub {
+      font-size: 1.36vw;
+      font-weight: 400;
+      color: var(--n35);
+      line-height: 1.75;
+      max-width: 42ch;
+      margin-bottom: 3vh;
+      opacity: 0;
+    }
+
+    .slide.active .s3-sub {
+      animation: fadeUp .5s ease .9s forwards;
+    }
+
+    .feature-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5vh;
+      opacity: 0;
+    }
+
+    .slide.active .feature-list {
+      animation: fadeUp .5s ease 1.05s forwards;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1vw;
+    }
+
+    .fi-icon {
+      width: 1.9vw;
+      height: 1.9vw;
+      border-radius: 7px;
+      background: rgba(232, 115, 90, .09);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: .1vh;
+    }
+
+    .fi-dot {
+      width: .48vw;
+      height: .48vw;
+      border-radius: 50%;
+      background: var(--salmon);
+    }
+
+    .fi-name {
+      font-size: 1.3vw;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: .25vh;
+    }
+
+    .fi-desc {
+      font-size: 1.13vw;
+      color: var(--n55);
+      line-height: 1.6;
+    }
+
+    /* =========================================
+       BARRA DE NAVEGACIÓN GLOBAL
+       ========================================= */
+    .nav-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 56px;
+      background: #1e3c65;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3vw;
+      z-index: 100;
+      overflow: visible;
+      transition: height 0.4s cubic-bezier(.4,0,.2,1);
+      /* Entra animada junto con el primer slide */
+      opacity: 0;
+      animation: fadeUp .6s ease 1.6s forwards;
+    }
+
+    /* Estado colapsado: solo se ven los logos */
+    .nav-bar.collapsed {
+      height: 34px;
+    }
+    .nav-bar.collapsed:hover {
+      height: 56px;
+    }
+
+    /* Extiende el área de hover hacia arriba (por si el puntero entra desde arriba) */
+    .nav-bar.collapsed::before {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      top: -16px;
+      height: 16px;
+    }
+
+    /* Flecha ↑ sutil en el centro cuando está colapsada */
+    .nav-bar.collapsed::after {
+      content: '';
+      position: absolute;
+      left: 50%; top: 50%;
+      transform: translate(-50%, -65%) rotate(-45deg);
+      width: 13px; height: 13px;
+      border-top: 2.5px solid rgba(255,255,255,.6);
+      border-right: 2.5px solid rgba(255,255,255,.6);
+      opacity: 1;
+      transition: opacity .2s ease;
+      pointer-events: none;
+      animation: chevBounce 2.2s ease-in-out infinite;
+    }
+    @keyframes chevBounce {
+      0%, 100% { transform: translate(-50%, -58%) rotate(-45deg); }
+      50%       { transform: translate(-50%, -78%) rotate(-45deg); }
+    }
+    .nav-bar.collapsed:hover::after { opacity: 0; }
+
+    /* Middle: flechas + hint + dots */
+    .nav-bar.collapsed .nav-arrows,
+    .nav-bar.collapsed .nav-hint,
+    .nav-bar.collapsed .nav-dots {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .nav-bar.collapsed:hover .nav-arrows,
+    .nav-bar.collapsed:hover .nav-hint,
+    .nav-bar.collapsed:hover .nav-dots {
+      opacity: 1;
+      pointer-events: auto;
+      transition: opacity 0.25s ease 0.1s;
+    }
+
+    .nav-hint {
+      font-size: 1.1vw;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .3);
+      display: flex;
+      align-items: center;
+      gap: .7vw;
+      min-width: 18vw;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .nh-arrow {
+      color: var(--salmon);
+      font-size: 1.43vw;
+    }
+
+    .nav-dots {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .ndot {
+      width: 6px;
+      height: 6px;
+      border-radius: 3px;
+      background: rgba(255, 255, 255, .18);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .ndot.on {
+      width: 22px;
+      background: var(--salmon);
+    }
+
+    .nav-arrows {
+      display: flex;
+      gap: 8px;
+    }
+
+    .narr {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, .14);
+      background: transparent;
+      color: rgba(255, 255, 255, .4);
+      font-size: 13px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s ease, color .2s ease, border-color .2s ease, transform .15s ease;
+    }
+
+    .narr:hover {
+      background: rgba(255, 255, 255, .14);
+      color: rgba(255, 255, 255, .95);
+      border-color: rgba(255, 255, 255, .4);
+      transform: scale(1.08);
+    }
+
+    .nav-logo {
+      position: absolute;
+      left: 2vw;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 34px;
+      opacity: 0;
+      filter: blur(10px);
+      transition: opacity 0.75s ease, filter 0.75s ease;
+      pointer-events: none;
+    }
+
+    .nav-logo.visible {
+      opacity: 1;
+      filter: blur(0);
+    }
+
+    /* ═══ IMPORTAR GOTHAM ROUNDED LOCALMENTE ═══ */
+
+    /* Light (300) */
+    @font-face {
+      font-family: 'Gotham Rounded';
+      src: url('fonts/GothamRounded-Light.otf') format('opentype'),
+        url('fonts/GothamRoundedLight_21020.ttf') format('truetype');
+      font-weight: 300;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* Book / Regular (400) */
+    @font-face {
+      font-family: 'Gotham Rounded';
+      src: url('fonts/GothamRounded-Book.otf') format('opentype'),
+        url('fonts/GothamRoundedBook_21018.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* Medium (500) */
+    @font-face {
+      font-family: 'Gotham Rounded';
+      src: url('fonts/GothamRounded-Medium.otf') format('opentype'),
+        url('fonts/GothamRoundedMedium_21022.ttf') format('truetype');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* Bold (700) */
+    @font-face {
+      font-family: 'Gotham Rounded';
+      src: url('fonts/GothamRounded-Bold.otf') format('opentype'),
+        url('fonts/GothamRoundedBold_21016.ttf') format('truetype');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* =========================================
+       SLIDE 4: ANATOMÍA DE UN PROCESO ROTO
+       ========================================= */
+    .s4-wrap {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      padding: clamp(16px, 4vh, 36px) 7vw clamp(12px, 3vh, 28px);
+    }
+
+    .s4-head {
+      flex-shrink: 0;
+      margin-bottom: clamp(8px, 2.2vh, 20px);
+    }
+
+    .s4-title {
+      font-size: clamp(22px, 3.19vw, 52px);
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.1;
+      letter-spacing: -.025em;
+      margin-bottom: clamp(3px, .6vh, 7px);
+      opacity: 0;
+    }
+    .slide.active .s4-title { animation: fadeUp .5s ease .1s forwards; }
+
+    .s4-sub {
+      font-size: 1.28vw;
+      color: var(--n55);
+      line-height: 1.6;
+      max-width: 62ch;
+      opacity: 0;
+    }
+    .slide.active .s4-sub { animation: fadeUp .5s ease .2s forwards; }
+
+    /* ── Section labels ── */
+    .s4-zone-label {
+      font-size: 0.93vw;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--n35);
+      margin-bottom: clamp(8px, 2vh, 16px);
+      opacity: 0;
+    }
+    .slide.active .s4-zone-label { animation: fadeUp .4s ease .3s forwards; }
+
+    .s4-zone-label-static {
+      font-size: 0.93vw;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--n35);
+      margin-bottom: clamp(6px, 1.4vh, 14px);
+    }
+
+    /* ── Flow zone ── */
+    .s4-flow-zone {
+      flex-shrink: 0;
+      margin-bottom: clamp(12px, 2.8vh, 24px);
+    }
+
+    .flow-track {
+      display: flex;
+      align-items: flex-start;
+      position: relative;
+    }
+
+    .flow-track::before {
+      content: '';
+      position: absolute;
+      top: clamp(26px, 2.6vw, 39px);
+      left: clamp(20px, 2.2vw, 34px);
+      right: clamp(20px, 2.2vw, 34px);
+      height: 1.5px;
+      background: var(--n08);
+      transform-origin: left;
+      transform: scaleX(0);
+      z-index: 0;
+    }
+    .slide.active .flow-track::before {
+      animation: growLine .8s cubic-bezier(.4, 0, .2, 1) .4s forwards;
+    }
+
+    @keyframes growLine {
+      to { transform: scaleX(1); }
+    }
+
+    .flow-node-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      position: relative;
+      z-index: 1;
+    }
+
+    .flow-node {
+      width: clamp(52px, 5.2vw, 78px);
+      height: clamp(52px, 5.2vw, 78px);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      opacity: 0;
+    }
+
+    .fn-system {
+      background: rgba(28, 53, 84, .05);
+      border: 1.5px solid rgba(28, 53, 84, .16);
+    }
+
+    .fn-auto {
+      background: rgba(28, 53, 84, .04);
+      border: 1.5px dashed rgba(28, 53, 84, .22);
+    }
+
+    .fn-manual {
+      background: rgba(232, 115, 90, .07);
+      border: 1.5px solid rgba(232, 115, 90, .3);
+    }
+
+    .fn-alert {
+      background: rgba(190, 50, 50, .06);
+      border: 1.5px solid rgba(190, 50, 50, .28);
+    }
+
+    .fn-num {
+      font-size: clamp(12px, 1.38vw, 20px);
+      font-weight: 900;
+      letter-spacing: .04em;
+    }
+    .fn-system .fn-num, .fn-auto .fn-num { color: var(--navy); opacity: .65; }
+    .fn-manual .fn-num { color: var(--salmon); }
+    .fn-alert .fn-num { color: #b83838; }
+
+    .fn-badge {
+      font-size: clamp(9px, 0.94vw, 13px);
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: clamp(2px, .25vh, 4px) .6vw;
+      border-radius: 100px;
+      white-space: nowrap;
+      margin-top: clamp(4px, .8vh, 9px);
+      opacity: 0;
+    }
+    .fn-badge-auto { background: rgba(28, 53, 84, .08); color: var(--n55); }
+    .fn-badge-manual { background: rgba(232, 115, 90, .13); color: var(--salmon); }
+
+    .fn-role {
+      font-size: clamp(10px, 1.19vw, 17px);
+      font-weight: 700;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      margin-top: clamp(3px, .6vh, 7px);
+      text-align: center;
+      opacity: 0;
+    }
+    .fn-role-sys { color: var(--n35); }
+    .fn-role-manual { color: var(--salmon); }
+    .fn-role-alert { color: #b83838; }
+
+    .fn-action {
+      font-size: clamp(10px, 1.16vw, 16px);
+      color: var(--n55);
+      text-align: center;
+      max-width: clamp(80px, 9.5vw, 130px);
+      line-height: 1.45;
+      margin-top: clamp(2px, .35vh, 5px);
+      opacity: 0;
+    }
+
+    /* Staggered node animations */
+    .slide.active .flow-node-wrap:nth-child(1) .flow-node { animation: nodeIn .4s cubic-bezier(.34,1.56,.64,1) .52s forwards; }
+    .slide.active .flow-node-wrap:nth-child(2) .flow-node { animation: nodeIn .4s cubic-bezier(.34,1.56,.64,1) .67s forwards; }
+    .slide.active .flow-node-wrap:nth-child(3) .flow-node { animation: nodeIn .4s cubic-bezier(.34,1.56,.64,1) .82s forwards; }
+    .slide.active .flow-node-wrap:nth-child(4) .flow-node { animation: nodeIn .4s cubic-bezier(.34,1.56,.64,1) .97s forwards; }
+    .slide.active .flow-node-wrap:nth-child(5) .flow-node { animation: nodeIn .4s cubic-bezier(.34,1.56,.64,1) 1.12s forwards; }
+
+    .slide.active .flow-node-wrap:nth-child(1) .fn-role,
+    .slide.active .flow-node-wrap:nth-child(1) .fn-badge,
+    .slide.active .flow-node-wrap:nth-child(1) .fn-action { animation: labelIn .4s ease .7s forwards; }
+    .slide.active .flow-node-wrap:nth-child(2) .fn-role,
+    .slide.active .flow-node-wrap:nth-child(2) .fn-badge,
+    .slide.active .flow-node-wrap:nth-child(2) .fn-action { animation: labelIn .4s ease .85s forwards; }
+    .slide.active .flow-node-wrap:nth-child(3) .fn-role,
+    .slide.active .flow-node-wrap:nth-child(3) .fn-badge,
+    .slide.active .flow-node-wrap:nth-child(3) .fn-action { animation: labelIn .4s ease 1s forwards; }
+    .slide.active .flow-node-wrap:nth-child(4) .fn-role,
+    .slide.active .flow-node-wrap:nth-child(4) .fn-badge,
+    .slide.active .flow-node-wrap:nth-child(4) .fn-action { animation: labelIn .4s ease 1.15s forwards; }
+    .slide.active .flow-node-wrap:nth-child(5) .fn-role,
+    .slide.active .flow-node-wrap:nth-child(5) .fn-badge,
+    .slide.active .flow-node-wrap:nth-child(5) .fn-action { animation: labelIn .4s ease 1.3s forwards; }
+
+    @keyframes nodeIn {
+      from { opacity: 0; filter: blur(12px); transform: scale(0.88); }
+      to   { opacity: 1; filter: blur(0);    transform: scale(1); }
+    }
+
+    @keyframes labelIn {
+      from { opacity: 0; filter: blur(6px); transform: translateY(5px); }
+      to   { opacity: 1; filter: blur(0);   transform: translateY(0); }
+    }
+
+    /* ── Bottom zone ── */
+    .s4-bottom {
+      flex: 1;
+      display: flex;
+      gap: 4vw;
+      min-height: 0;
+      align-items: flex-start;
+    }
+
+    /* Silos */
+    .s4-silos {
+      width: 36%;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+    }
+    .slide.active .s4-silos { animation: fadeUp .5s ease 1.35s forwards; }
+
+    .silo-row {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .silo-block {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: .45vh;
+    }
+
+    .silo-name {
+      font-size: 1.07vw;
+      font-weight: 800;
+      padding: .65vh .7vw;
+      border-radius: 6px;
+      text-align: center;
+    }
+    .silo-excel .silo-name {
+      background: rgba(28, 53, 84, .05);
+      color: var(--navy);
+      border: 1px solid rgba(28, 53, 84, .1);
+    }
+    .silo-sinergia .silo-name {
+      background: rgba(28, 53, 84, .05);
+      color: var(--navy);
+      border: 1px solid rgba(28, 53, 84, .1);
+    }
+    .silo-wp .silo-name {
+      background: rgba(232, 115, 90, .07);
+      color: var(--salmon);
+      border: 1px solid rgba(232, 115, 90, .2);
+    }
+
+    .silo-items {
+      display: flex;
+      flex-direction: column;
+      gap: .35vh;
+    }
+
+    .silo-item {
+      font-size: 0.94vw;
+      color: var(--n55);
+      padding: .32vh .5vw;
+      background: rgba(28, 53, 84, .025);
+      border-radius: 4px;
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    .silo-connector {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: .55vh .55vw 0;
+      gap: .15vh;
+    }
+    .silo-conn-line {
+      width: 1px;
+      height: .9vw;
+      background: repeating-linear-gradient(180deg, var(--n15) 0, var(--n15) 3px, transparent 3px, transparent 6px);
+    }
+    .silo-conn-x {
+      font-size: 0.87vw;
+      color: rgba(190, 50, 50, .4);
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    /* Diagnosis */
+    .s4-diagnosis {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      border-left: 1px solid var(--n08);
+      padding-left: 3vw;
+      opacity: 0;
+    }
+    .slide.active .s4-diagnosis { animation: fadeUp .5s ease 1.5s forwards; }
+
+    .diag-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1vw;
+      padding: clamp(7px, 1.2vh, 13px) 0;
+      border-bottom: 1px solid var(--n06);
+    }
+    .diag-item:first-child { border-top: 1px solid var(--n06); }
+
+    .diag-num {
+      font-size: clamp(20px, 2.36vw, 34px);
+      font-weight: 900;
+      color: rgba(28, 53, 84, .06);
+      line-height: 1;
+      flex-shrink: 0;
+      width: clamp(22px, 2.6vw, 36px);
+      letter-spacing: -.05em;
+      padding-top: clamp(1px, .1vh, 2px);
+    }
+
+    .diag-body { flex: 1; }
+
+    .diag-title {
+      font-size: clamp(12px, 1.26vw, 18px);
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: clamp(2px, .3vh, 4px);
+      line-height: 1.2;
+    }
+
+    .diag-desc {
+      font-size: clamp(11px, 1.06vw, 15px);
+      color: var(--n55);
+      line-height: 1.55;
+    }
+    .diag-desc strong { color: var(--navy); font-weight: 700; }
+
+    /* =========================================
+       SLIDE 5: UN PROCESO ROTO SE MULTIPLICA
+       ========================================= */
+    .s5-wrap {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      padding: 4vh 7vw 3vh;
+    }
+
+    .s5-head {
+      flex-shrink: 0;
+      margin-bottom: 2.2vh;
+    }
+
+    .s5-title {
+      font-size: 3.19vw;
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.1;
+      letter-spacing: -.025em;
+      margin-bottom: .6vh;
+      opacity: 0;
+    }
+    .slide.active .s5-title { animation: fadeUp .5s ease .1s forwards; }
+
+    .s5-sub {
+      font-size: 1.28vw;
+      color: var(--n55);
+      line-height: 1.6;
+      max-width: 68ch;
+      opacity: 0;
+    }
+    .slide.active .s5-sub { animation: fadeUp .5s ease .2s forwards; }
+
+    /* ── Centers visual ── */
+    .s5-centers {
+      flex-shrink: 0;
+      display: flex;
+      align-items: stretch;
+      height: 35vh;
+      margin-bottom: 3vh;
+    }
+
+    .s5-photo-wrap {
+      flex: 1;
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .s5-photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .s5-photo-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(12,28,52,.97) 0%, rgba(12,28,52,.72) 48%, rgba(12,28,52,.18) 100%);
+    }
+
+    .s5-photo-left {
+      opacity: 0;
+      transform: translateX(-18px);
+    }
+    .slide.active .s5-photo-left {
+      animation: slideFromLeft .7s cubic-bezier(.25,1,.5,1) .35s forwards;
+    }
+
+    .s5-photo-right {
+      opacity: 0;
+      transform: translateX(18px);
+    }
+    .slide.active .s5-photo-right {
+      animation: slideFromRight .7s cubic-bezier(.25,1,.5,1) .35s forwards;
+    }
+
+    @keyframes slideFromLeft {
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes slideFromRight {
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .s5-photo-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 2vh 1.6vw;
+    }
+
+    .s5-photo-tag {
+      font-size: 0.87vw;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.88);
+      margin-bottom: .4vh;
+    }
+
+    .s5-photo-name {
+      font-size: 1.37vw;
+      font-weight: 800;
+      color: rgba(255,255,255,.95);
+      letter-spacing: -.01em;
+      margin-bottom: .8vh;
+    }
+
+    .s5-pp {
+      font-size: 0.94vw;
+      color: rgba(255,255,255,.92);
+      display: flex;
+      align-items: center;
+      gap: .55vw;
+      line-height: 1.6;
+    }
+
+    .s5-pp::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--salmon);
+      opacity: .75;
+      flex-shrink: 0;
+    }
+
+    .s5-pp-unknown {
+      color: rgba(255,255,255,.65);
+      font-style: italic;
+    }
+
+    .s5-pp-unknown::before {
+      background: rgba(255,255,255,.3);
+    }
+
+    /* ── ×2 central ── */
+    .s5-multiplier {
+      width: 17vw;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1vh;
+      padding: 0 1.2vw;
+    }
+
+    .s5-x2 {
+      font-size: 7.02vw;
+      font-weight: 900;
+      color: var(--salmon);
+      line-height: 1;
+      letter-spacing: -.04em;
+      opacity: 0;
+    }
+    .slide.active .s5-x2 {
+      animation: x2In .8s cubic-bezier(.34,1.56,.64,1) .62s forwards;
+    }
+
+    @keyframes x2In {
+      from { opacity: 0; filter: blur(18px); transform: scale(.72); }
+      to   { opacity: 1; filter: blur(0);    transform: scale(1); }
+    }
+
+    .s5-x2-line {
+      width: 1.5px;
+      height: 0;
+      background: var(--n15);
+      border-radius: 2px;
+    }
+    .slide.active .s5-x2-line {
+      animation: growVLine .4s ease .95s forwards;
+    }
+
+    @keyframes growVLine {
+      to { height: 2.8vh; }
+    }
+
+    .s5-x2-caption {
+      font-size: 1.07vw;
+      font-weight: 500;
+      color: var(--n55);
+      text-align: center;
+      line-height: 1.5;
+      font-style: italic;
+      max-width: 13vw;
+      opacity: 0;
+    }
+    .slide.active .s5-x2-caption {
+      animation: fadeUp .4s ease 1.1s forwards;
+    }
+
+    /* ── Four fractures ── */
+    .s5-fractures {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      min-height: 0;
+      border-top: 1px solid var(--n08);
+      padding-top: 2.2vh;
+      gap: 0;
+    }
+
+    .s5-frac {
+      display: flex;
+      flex-direction: column;
+      padding-right: 2.2vw;
+      opacity: 0;
+    }
+
+    .s5-frac:not(:last-child) {
+      border-right: 1px solid var(--n08);
+      margin-right: 2.2vw;
+    }
+
+    .slide.active .s5-frac:nth-child(1) { animation: fadeUp .45s ease 1s forwards; }
+    .slide.active .s5-frac:nth-child(2) { animation: fadeUp .45s ease 1.1s forwards; }
+    .slide.active .s5-frac:nth-child(3) { animation: fadeUp .45s ease 1.2s forwards; }
+    .slide.active .s5-frac:nth-child(4) { animation: fadeUp .45s ease 1.3s forwards; }
+
+    .s5-frac-x {
+      font-size: 3.07vw;
+      font-weight: 900;
+      color: var(--salmon);
+      line-height: 1;
+      letter-spacing: -.04em;
+      margin-bottom: .8vh;
+    }
+
+    .s5-frac-title {
+      font-size: 1.3vw;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: .55vh;
+      line-height: 1.2;
+    }
+
+    .s5-frac-desc {
+      font-size: 1.1vw;
+      color: var(--n55);
+      line-height: 1.55;
+    }
+
+    .s5-frac-desc strong {
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    /* =========================================
+       SLIDE 6: KĀLIDA CONNECT — REVEAL
+       ========================================= */
+    .s6-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      background: var(--white);
+      padding: 5vh 8vw;
+      gap: 3.5vh;
+    }
+
+    .s6-intro {
+      font-size: 1.26vw;
+      font-weight: 300;
+      color: var(--n35);
+      letter-spacing: .12em;
+      text-align: center;
+      text-transform: uppercase;
+      opacity: 0;
+    }
+    .slide.active .s6-intro {
+      animation: fadeUp .9s ease .4s forwards;
+    }
+
+    .s6-brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      filter: blur(22px);
+    }
+    .slide.active .s6-brand {
+      animation: brandReveal 1.6s cubic-bezier(.2, 0, .2, 1) 1.6s forwards;
+    }
+
+    @keyframes brandReveal {
+      from { opacity: 0; filter: blur(22px); transform: scale(.96); }
+      to   { opacity: 1; filter: blur(0);    transform: scale(1); }
+    }
+
+    .s6-video {
+      max-width: 54vw;
+      max-height: 44vh;
+      display: block;
+      object-fit: contain;
+      border-radius: 10px;
+    }
+
+    .s6-fallback {
+      max-width: 54vw;
+      max-height: 44vh;
+      display: none;
+      object-fit: contain;
+      border-radius: 10px;
+    }
+
+    .s6-tagline {
+      font-size: 1.19vw;
+      font-weight: 300;
+      color: transparent;
+      text-align: center;
+      letter-spacing: .04em;
+      line-height: 1.6;
+      max-width: 50ch;
+      filter: blur(8px);
+      transition: color 1.1s ease, filter 1.1s ease;
+    }
+
+    .s6-tagline.visible {
+      color: var(--n55);
+      filter: blur(0);
+    }
+
+    .s6-tagline strong {
+      color: var(--salmon);
+      font-weight: 700;
+      letter-spacing: .01em;
+    }
+
+    /* Logo derecho nav — Kālida Connect */
+    .nav-logo-right {
+      position: absolute;
+      right: 2vw;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 26px;
+      opacity: 0;
+      filter: blur(10px);
+      transition: opacity 0.75s ease, filter 0.75s ease;
+      pointer-events: none;
+      object-fit: contain;
+    }
+
+    .nav-logo-right.visible {
+      opacity: 1;
+      filter: blur(0);
+    }
+
+    /* =============================================
+       Slide 7 — Kālida Connect API (arquitectura)
+       ============================================= */
+    #slide-6 { background: #07111e; }
+    body.s7-active { background: #07111e; }
+
+    .s7-wrap {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .s7-svg {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+    }
+
+    @keyframes drawSpoke {
+      to { stroke-dashoffset: 0; }
+    }
+
+    .s7-spoke {
+      fill: none;
+      stroke-linecap: round;
+      stroke-dasharray: 840;
+      stroke-dashoffset: 840;
+    }
+    .s7-sp-solid  { stroke: #E8735A; stroke-width: 1.5; stroke-opacity: .42; }
+    .s7-sp-future { stroke: #E8735A; stroke-width: 1.5; stroke-opacity: .2; }
+
+    .slide.active .s7-sp1 { animation: drawSpoke .75s ease .65s  forwards; }
+    .slide.active .s7-sp2 { animation: drawSpoke .75s ease 1.05s forwards; }
+    .slide.active .s7-sp3 { animation: drawSpoke .75s ease 1.45s forwards; }
+    .slide.active .s7-sp4 { animation: drawSpoke .75s ease 1.85s forwards; }
+
+    @keyframes hubIn {
+      from { opacity: 0; filter: blur(16px); transform: translate(-50%,-50%) scale(.88); }
+      to   { opacity: 1; filter: blur(0);    transform: translate(-50%,-50%) scale(1); }
+    }
+
+    .s7-hub {
+      position: absolute;
+      left: 50%; top: 50%;
+      width: 11.5vw; height: 11.5vw;
+      border-radius: 50%;
+      overflow: hidden;
+      background: #fff;
+      border: 2px solid rgba(232,115,90,.5);
+      box-shadow: 0 0 60px rgba(232,115,90,.28), 0 0 120px rgba(232,115,90,.1);
+      opacity: 0;
+      filter: blur(16px);
+      transform: translate(-50%,-50%) scale(.88);
+    }
+    .slide.active .s7-hub { animation: hubIn .9s ease .3s forwards; }
+
+    .s7-hub img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+      padding: 1.1vw;
+    }
+
+    .s7-title {
+      position: absolute;
+      top: 3%;
+      left: 0; right: 0;
+      text-align: center;
+      color: #E8735A;
+      font-size: 1.22vw;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      opacity: 0;
+    }
+    .slide.active .s7-title { animation: fadeUp .8s ease .1s forwards; }
+
+    /* Node position wrappers — quadrant layout */
+    .s7-np { position: absolute; }
+    .s7-np1 { left: 18.2%; top: 18.5%; transform: translate(-50%,-50%); } /* Sinergia TL */
+    .s7-np2 { left: 81.8%; top: 18.5%; transform: translate(-50%,-50%); } /* WordPress TR */
+    .s7-np3 { left: 18.2%; top: 81.5%; transform: translate(-50%,-50%); } /* Centros BL */
+    .s7-np4 { left: 81.8%; top: 81.5%; transform: translate(-50%,-50%); } /* App Móvil BR */
+
+    .s7-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .65vw;
+      width: 14vw;
+      text-align: center;
+      opacity: 0;
+      filter: blur(10px);
+      transform: scale(.88);
+    }
+    /* Bottom nodes: chips + title appear ABOVE the icon */
+    .s7-np3 .s7-node,
+    .s7-np4 .s7-node { flex-direction: column-reverse; }
+
+    .slide.active .s7-np1 .s7-node { animation: nodeIn .65s ease 1.0s  forwards; }
+    .slide.active .s7-np2 .s7-node { animation: nodeIn .65s ease 1.4s  forwards; }
+    .slide.active .s7-np3 .s7-node { animation: nodeIn .65s ease 1.8s  forwards; }
+    .slide.active .s7-np4 .s7-node { animation: nodeIn .65s ease 2.2s  forwards; }
+
+    /* Icon circles */
+    .s7-icon {
+      width: 7.2vw; height: 7.2vw;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      flex-shrink: 0;
+      font-size: 2vw;
+    }
+
+    /* Sinergia: sphere with real logo */
+    .s7-icon-sinergia {
+      background: radial-gradient(circle at 38% 32%, #2d4e80 0%, #1b3360 42%, #0e1e3c 75%, #07111f 100%);
+      box-shadow: 0 0 0 1.5px rgba(255,255,255,.1), 0 8px 24px rgba(0,0,0,.5), 0 0 30px rgba(28,53,84,.5);
+      overflow: hidden;
+    }
+    .s7-icon-sinergia img {
+      width: 78%; height: 78%;
+      object-fit: contain;
+    }
+
+    /* WordPress */
+    .s7-icon-wp {
+      background: linear-gradient(135deg, #2596be 0%, #21759B 60%, #1a5e7a 100%);
+      box-shadow: 0 8px 24px rgba(0,0,0,.45), 0 0 30px rgba(33,117,155,.3);
+      overflow: hidden;
+    }
+    .s7-icon-wp img {
+      width: 72%; height: 72%;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+    }
+
+    /* Centros Físicos */
+    .s7-icon-centro {
+      background: rgba(255,255,255,.05);
+      border: 1.5px solid rgba(255,255,255,.18);
+      box-shadow: 0 8px 24px rgba(0,0,0,.3);
+    }
+    .s7-icon-centro img {
+      width: 72%; height: 72%;
+      object-fit: contain;
+    }
+
+    /* App Móvil — future */
+    .s7-icon-app {
+      background: rgba(232,115,90,.05);
+      border: 1.5px dashed rgba(232,115,90,.38);
+    }
+    .s7-icon-app img {
+      width: 72%; height: 72%;
+      object-fit: contain;
+    }
+
+    /* ×2 badge */
+    .s7-badge-x2 {
+      position: absolute;
+      bottom: .1vw; right: .1vw;
+      width: 1.9vw; height: 1.9vw;
+      border-radius: 50%;
+      background: #E8735A;
+      color: #fff;
+      font-size: .7vw;
+      font-weight: 900;
+      display: flex; align-items: center; justify-content: center;
+      border: 2px solid #07111e;
+    }
+
+    /* FUTURO badge */
+    .s7-badge-future {
+      position: absolute;
+      top: -.12vw; right: -.12vw;
+      background: rgba(232,115,90,.14);
+      border: 1px solid rgba(232,115,90,.42);
+      border-radius: 8px;
+      color: #E8735A;
+      font-size: .5vw;
+      font-weight: 800;
+      letter-spacing: .08em;
+      padding: .1vh .38vw;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .s7-node-title {
+      font-size: 1.38vw;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: .3vh;
+    }
+
+    .s7-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .32vw;
+      justify-content: center;
+    }
+
+    .s7-chip {
+      font-size: .9vw;
+      padding: .2vh .52vw;
+      border-radius: 4px;
+      background: rgba(255,255,255,.07);
+      color: rgba(255,255,255,.55);
+      white-space: nowrap;
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    /* Direction chips at spoke midpoints */
+    .s7-dir {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      background: #07111e;
+      border: 1px solid rgba(232,115,90,.28);
+      border-radius: 20px;
+      padding: .22vh .55vw;
+      font-size: .85vw;
+      color: rgba(232,115,90,.72);
+      font-weight: 600;
+      z-index: 10;
+      opacity: 0;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+    /* Midpoints (SVG coords / viewBox size): */
+    .s7-dir1 { left: 34.1%; top: 34.3%; } /* mid of Hub(960,540)→Sinergia(350,200) */
+    .s7-dir2 { left: 65.9%; top: 34.3%; } /* mid of Hub→WP(1570,200) */
+    .s7-dir3 { left: 34.1%; top: 65.7%; } /* mid of Hub→Centro(350,880) */
+    .s7-dir4 { left: 65.9%; top: 65.7%; } /* mid of Hub→App(1570,880) */
+
+    .slide.active .s7-dir1 { animation: fadeIn .4s ease 1.35s forwards; }
+    .slide.active .s7-dir2 { animation: fadeIn .4s ease 1.75s forwards; }
+    .slide.active .s7-dir3 { animation: fadeIn .4s ease 2.15s forwards; }
+    .slide.active .s7-dir4 { animation: fadeIn .4s ease 2.55s forwards; }
+
+    /* =========================================
+       SLIDE 8: ARQUITECTURA TÉCNICA
+       ========================================= */
+    #slide-7 { background: #07111e; }
+
+    .s8-wrap {
+      display: flex; flex-direction: column;
+      width: 100%; height: 100%;
+      padding: clamp(14px,2.8vh,26px) clamp(60px,9vw,140px) clamp(10px,1.8vh,18px);
+      gap: clamp(8px,1.2vh,14px);
+    }
+    .s8-eyebrow {
+      flex-shrink: 0; text-align: center;
+      font-size: clamp(11px,1vw,15px); font-weight: 700;
+      letter-spacing: .22em; text-transform: uppercase;
+      color: #E8735A; opacity: 0;
+    }
+    .slide.active .s8-eyebrow { animation: fadeUp .7s ease .1s forwards; }
+
+    .s8-infra { display: flex; align-items: stretch; flex: 1; min-height: 0; gap: 0; }
+
+    .s8-server {
+      flex: 1; display: flex; flex-direction: column;
+      gap: clamp(6px,.9vh,11px);
+      padding: clamp(10px,1.4vh,18px) clamp(12px,1.2vw,20px);
+      border-radius: 10px; border: 1px solid; opacity: 0; min-height: 0;
+    }
+    .s8-ext { border-color: rgba(100,160,255,.18); background: rgba(20,50,110,.12); }
+    .slide.active .s8-ext { animation: fadeUp .7s ease .3s forwards; }
+    .s8-own { border-color: rgba(232,115,90,.2); background: rgba(232,115,90,.04); }
+    .slide.active .s8-own { animation: fadeUp .7s ease .3s forwards; }
+
+    .s8-srv-hd {
+      display: flex; align-items: center; gap: clamp(6px,.65vw,10px);
+      padding-bottom: clamp(6px,.9vh,10px);
+      border-bottom: 1px solid rgba(255,255,255,.06); flex-shrink: 0;
+    }
+    .s8-srv-img { width: clamp(24px,2.6vw,40px); height: clamp(24px,2.6vw,40px); object-fit: contain; opacity: .85; flex-shrink: 0; }
+    .s8-srv-meta { flex: 1; min-width: 0; }
+    .s8-srv-name { font-size: clamp(13px,1.15vw,18px); font-weight: 800; color: #fff; line-height: 1.1; }
+    .s8-srv-env  { font-size: clamp(10px,.78vw,13px); color: rgba(255,255,255,.52); margin-top: 2px; }
+    .s8-srv-badges { display: flex; gap: clamp(3px,.28vw,4px); flex-wrap: wrap; flex-shrink: 0; }
+    .s8-srv-badge {
+      font-size: clamp(8px,.62vw,10px); font-weight: 700; letter-spacing: .05em;
+      padding: 2px clamp(4px,.35vw,6px); border-radius: 3px; text-transform: uppercase; white-space: nowrap;
+    }
+    .s8-badge-blue   { background: rgba(100,160,255,.12); color: rgba(140,190,255,.85); border: 1px solid rgba(100,160,255,.22); }
+    .s8-badge-green  { background: rgba(74,222,128,.1);   color: rgba(74,222,128,.85);  border: 1px solid rgba(74,222,128,.2); }
+    .s8-badge-orange { background: rgba(232,115,90,.14);  color: rgba(232,115,90,.9);   border: 1px solid rgba(232,115,90,.24); }
+    .s8-badge-dim    { background: rgba(255,255,255,.05); color: rgba(255,255,255,.45); border: 1px solid rgba(255,255,255,.1); }
+
+    .s8-box {
+      border: 1px solid rgba(255,255,255,.09); border-radius: 7px;
+      padding: clamp(7px,1vh,12px) clamp(8px,.9vw,14px);
+      background: rgba(255,255,255,.03);
+      display: flex; flex-direction: column; gap: clamp(4px,.55vh,7px);
+    }
+    .s8-box-api    { border-color: rgba(232,115,90,.2);  background: rgba(232,115,90,.04); }
+    .s8-box-future { border-color: rgba(255,255,255,.1); border-style: dashed; background: transparent; }
+    .s8-box-hd  { display: flex; align-items: center; gap: clamp(6px,.62vw,10px); }
+    .s8-box-icon { width: clamp(22px,2.2vw,32px); height: clamp(22px,2.2vw,32px); object-fit: contain; border-radius: 5px; flex-shrink: 0; }
+    .s8-icon-wp    { background: #0d1b2a; display: flex; align-items: center; justify-content: center; }
+    .s8-icon-wp img { width: 72%; height: 72%; object-fit: contain; filter: brightness(0) invert(1); }
+    .s8-icon-round { border-radius: 50%; overflow: hidden; }
+    .s8-future-dot {
+      width: clamp(22px,2.2vw,32px); height: clamp(22px,2.2vw,32px);
+      border-radius: 50%; border: 1px dashed rgba(255,255,255,.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: clamp(10px,1vw,14px); color: rgba(255,255,255,.25); flex-shrink: 0;
+    }
+    .s8-box-name { font-size: clamp(11px,1.05vw,16px); font-weight: 800; color: #fff; flex: 1; }
+    .s8-box-name-dim { color: rgba(255,255,255,.5); font-weight: 600; }
+    .s8-chips { display: flex; flex-wrap: wrap; gap: clamp(2px,.28vw,4px); }
+    .s8-chip {
+      font-size: clamp(9px,.72vw,11px); padding: 2px clamp(4px,.38vw,6px); border-radius: 3px;
+      background: rgba(255,255,255,.07); color: rgba(255,255,255,.62);
+      border: 1px solid rgba(255,255,255,.09); white-space: nowrap;
+    }
+    .s8-chip.hi   { background: rgba(232,115,90,.12); color: rgba(232,115,90,.85); border-color: rgba(232,115,90,.2); }
+    .s8-chip.blue { background: rgba(100,160,255,.1);  color: rgba(140,190,255,.8);  border-color: rgba(100,160,255,.18); }
+    .s8-box-note  { font-size: clamp(10px,.75vw,12px); color: rgba(255,255,255,.55); line-height: 1.4; }
+
+    .s8-endpoints { margin-top: auto; padding-top: clamp(6px,.8vh,10px); border-top: 1px solid rgba(255,255,255,.05); }
+    .s8-endpoints-label {
+      font-size: clamp(9px,.68vw,11px); font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: rgba(100,160,255,.6); margin-bottom: clamp(4px,.5vh,6px);
+    }
+
+    .s8-conn {
+      flex-shrink: 0; width: clamp(60px,7vw,100px);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: clamp(4px,.55vh,8px); opacity: 0;
+    }
+    .slide.active .s8-conn { animation: fadeIn .6s ease .88s forwards; }
+    .s8-conn-dash {
+      width: 100%; height: 1px;
+      background: repeating-linear-gradient(90deg, rgba(232,115,90,.5) 0, rgba(232,115,90,.5) 5px, transparent 5px, transparent 10px);
+    }
+    .s8-conn-arr   { font-size: clamp(16px,1.4vw,22px); color: rgba(232,115,90,.7); line-height: 1; }
+    .s8-conn-label {
+      text-align: center; font-size: clamp(9px,.68vw,11px); font-weight: 700;
+      letter-spacing: .07em; text-transform: uppercase; color: rgba(232,115,90,.7);
+      background: rgba(232,115,90,.08); border: 1px solid rgba(232,115,90,.18);
+      border-radius: 4px; padding: clamp(2px,.3vh,4px) clamp(4px,.38vw,6px);
+      line-height: 1.5; white-space: nowrap;
+    }
+
+    .s8-bridge {
+      flex-shrink: 0; display: flex; align-items: center;
+      gap: clamp(8px,1vw,14px); opacity: 0;
+    }
+    .slide.active .s8-bridge { animation: fadeIn .5s ease 1.05s forwards; }
+    .s8-bridge-line  { flex: 1; height: 1px; background: rgba(255,255,255,.06); }
+    .s8-bridge-label {
+      font-size: clamp(9px,.72vw,11px); font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: rgba(255,255,255,.28); white-space: nowrap;
+    }
+
+    .s8-clients { display: flex; gap: clamp(8px,1.2vw,16px); flex-shrink: 0; }
+    .s8-client {
+      flex: 1; border: 1px solid rgba(255,255,255,.09); border-radius: 8px;
+      padding: clamp(8px,1.1vh,14px) clamp(10px,1vw,15px);
+      display: flex; flex-direction: column; gap: clamp(3px,.45vh,6px); opacity: 0;
+    }
+    .s8-client-future { border-color: rgba(232,115,90,.15); border-style: dashed; }
+    .slide.active .s8-client:nth-child(1) { animation: fadeUp .5s ease 1.15s forwards; }
+    .slide.active .s8-client:nth-child(2) { animation: fadeUp .5s ease 1.30s forwards; }
+    .slide.active .s8-client:nth-child(3) { animation: fadeUp .5s ease 1.45s forwards; }
+    .s8-client-hd   { display: flex; align-items: center; gap: clamp(6px,.55vw,9px); }
+    .s8-client-dot  { width: clamp(6px,.5vw,8px); height: clamp(6px,.5vw,8px); border-radius: 50%; flex-shrink: 0; }
+    .s8-dot-active  { background: #4ade80; box-shadow: 0 0 6px rgba(74,222,128,.55); }
+    .s8-dot-pending { background: #fbbf24; }
+    .s8-dot-future  { background: rgba(255,255,255,.2); }
+    .s8-client-name { font-size: clamp(11px,.98vw,15px); font-weight: 800; color: #fff; flex: 1; }
+    .s8-client-sub  {
+      font-size: clamp(10px,.72vw,12px); color: rgba(255,255,255,.52);
+      padding-left: calc(clamp(6px,.5vw,8px) + clamp(6px,.55vw,9px));
+    }
+    .s8-client-chips {
+      display: flex; flex-wrap: wrap; gap: clamp(2px,.28vw,4px);
+      padding-left: calc(clamp(6px,.5vw,8px) + clamp(6px,.55vw,9px));
+    }
+
+    /* =========================================
+       SLIDE 9: LAS FASES DEL PROYECTO
+       ========================================= */
+    #slide-8 { background: #07111e; }
+
+    .s9-wrap {
+      display: flex; flex-direction: column;
+      width: 100%; height: 100%;
+      padding: clamp(22px,3.5vh,42px) clamp(36px,4.5vw,72px) clamp(14px,2.2vh,26px);
+      gap: 0;
+    }
+
+    .s9-hd { flex-shrink: 0; margin-bottom: clamp(10px,2vh,26px); }
+    .s9-eyebrow {
+      font-size: clamp(11px,.92vw,15px); font-weight: 700; letter-spacing: .22em;
+      text-transform: uppercase; color: #E8735A;
+      margin-bottom: clamp(4px,.5vh,8px); opacity: 0;
+    }
+    .slide.active .s9-eyebrow { animation: fadeUp .7s ease .1s forwards; }
+    .s9-title {
+      font-size: clamp(28px,3.5vw,58px); font-weight: 800; color: #fff;
+      line-height: 1.05; letter-spacing: -.025em; opacity: 0;
+    }
+    .slide.active .s9-title { animation: fadeUp .8s ease .2s forwards; }
+
+    .s9-timeline {
+      flex: 1; min-height: 0; display: flex; flex-direction: column; position: relative;
+    }
+
+    .s9-rail-bg, .s9-rail-fill {
+      position: absolute; height: 1.5px;
+      top: clamp(17px,1.6vw,23px); z-index: 0; pointer-events: none;
+    }
+    .s9-rail-bg  { left: 10%; right: 10%; background: rgba(255,255,255,.1); }
+    .s9-rail-fill {
+      left: 10%; width: 0;
+      background: linear-gradient(90deg, #E8735A 0%, rgba(232,115,90,.18) 100%);
+    }
+    .slide.active .s9-rail-fill { animation: s9Rail 1.5s cubic-bezier(.4,0,.2,1) .45s forwards; }
+    @keyframes s9Rail { to { width: 60%; } }
+
+    .s9-phases { display: flex; flex: 1; min-height: 0; }
+
+    .s9-phase {
+      flex: 1; display: flex; flex-direction: column; align-items: center;
+      padding: 0 clamp(4px,.45vw,8px); opacity: 0; position: relative;
+    }
+    .slide.active .s9-phase:nth-child(1) { animation: fadeUp .6s ease .50s forwards; }
+    .slide.active .s9-phase:nth-child(2) { animation: fadeUp .6s ease .68s forwards; }
+    .slide.active .s9-phase:nth-child(3) { animation: fadeUp .6s ease .86s forwards; }
+    .slide.active .s9-phase:nth-child(4) { animation: fadeUp .6s ease 1.04s forwards; }
+    .slide.active .s9-phase:nth-child(5) { animation: fadeUp .6s ease 1.22s forwards; }
+
+    .s9-node {
+      width: clamp(34px,3.2vw,46px); height: clamp(34px,3.2vw,46px);
+      border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      border: 1.5px solid rgba(255,255,255,.3);
+      background: #07111e; z-index: 2; position: relative;
+      font-size: clamp(13px,1.2vw,17px); font-weight: 900;
+      color: rgba(255,255,255,.7);
+      transition: border-color .35s ease, color .35s ease, box-shadow .35s ease;
+    }
+    /* Fase 4 node — muy apagado, sin interactividad */
+    .s9-phase-opt .s9-node {
+      border-style: dashed; border-color: rgba(255,255,255,.1);
+      color: rgba(255,255,255,.2);
+    }
+    /* Fases 0-3 highlight */
+    .s9-phase:not(.s9-phase-opt).s9-hi .s9-node,
+    .s9-phase:not(.s9-phase-opt):hover .s9-node {
+      border-color: #E8735A; color: #E8735A;
+      box-shadow: 0 0 0 5px rgba(232,115,90,.13), 0 0 22px rgba(232,115,90,.22);
+    }
+
+    .s9-gap { height: clamp(10px,1.4vh,18px); flex-shrink: 0; }
+
+    .s9-card {
+      flex: 1; min-height: 0; width: 100%;
+      border: 1px solid rgba(255,255,255,.08); border-radius: 10px;
+      padding: clamp(10px,1.4vh,18px) clamp(10px,1.1vw,16px);
+      display: flex; flex-direction: column; gap: clamp(5px,.65vh,9px);
+      position: relative; overflow: hidden;
+      transition: border-color .35s ease, background .35s ease, transform .35s ease, box-shadow .35s ease;
+    }
+    /* Watermark numérico — más visible */
+    .s9-card::before {
+      content: attr(data-n);
+      position: absolute; right: -.02em; bottom: -.2em;
+      font-size: clamp(70px,10vw,130px); font-weight: 900;
+      color: rgba(255,255,255,.1); line-height: 1;
+      pointer-events: none; letter-spacing: -.06em;
+    }
+    /* Fases 0-3: hover y highlight activos */
+    .s9-phase:not(.s9-phase-opt).s9-hi .s9-card,
+    .s9-phase:not(.s9-phase-opt):hover .s9-card {
+      border-color: rgba(232,115,90,.3);
+      background: rgba(232,115,90,.06);
+      transform: translateY(-5px);
+      box-shadow: 0 12px 32px rgba(0,0,0,.35), 0 0 0 1px rgba(232,115,90,.12);
+    }
+    .s9-phase:not(.s9-phase-opt).s9-hi .s9-card::before,
+    .s9-phase:not(.s9-phase-opt):hover .s9-card::before {
+      color: rgba(232,115,90,.18);
+    }
+    /* Fase 4 — card muy oscura, sin hover */
+    .s9-phase-opt .s9-card {
+      border-style: dashed; border-color: rgba(255,255,255,.05);
+      background: rgba(0,0,0,.15); opacity: .5;
+    }
+
+    .s9-phase-lbl {
+      font-size: clamp(10px,.8vw,13px); font-weight: 700; letter-spacing: .15em;
+      text-transform: uppercase; color: rgba(232,115,90,.65);
+    }
+    .s9-phase-opt .s9-phase-lbl { color: rgba(255,255,255,.18); }
+
+    .s9-phase-name {
+      font-size: clamp(15px,1.35vw,22px); font-weight: 800; color: #fff; line-height: 1.15;
+    }
+    .s9-phase-opt .s9-phase-name { color: rgba(255,255,255,.3); }
+
+    .s9-phase-date {
+      display: inline-flex; align-items: center;
+      font-size: clamp(10px,.8vw,13px); font-weight: 700; letter-spacing: .04em;
+      color: rgba(255,255,255,.65); background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.14); border-radius: 100px;
+      padding: 2px clamp(6px,.55vw,9px); width: fit-content;
+    }
+    .s9-phase-opt .s9-phase-date {
+      color: rgba(255,255,255,.22); border-color: rgba(255,255,255,.07);
+    }
+
+    .s9-items {
+      list-style: none; flex: 1; min-height: 0;
+      display: flex; flex-direction: column; gap: clamp(5px,.58vh,8px);
+      margin-top: clamp(2px,.3vh,4px);
+    }
+    .s9-item {
+      font-size: clamp(11px,.9vw,14px); color: rgba(255,255,255,.75);
+      line-height: 1.35; display: flex; gap: clamp(5px,.45vw,7px);
+      align-items: flex-start; transition: color .3s ease;
+    }
+    .s9-item::before { content: '—'; color: rgba(255,255,255,.38); flex-shrink: 0; }
+    /* Fases 0-3 hover: items se iluminan */
+    .s9-phase:not(.s9-phase-opt).s9-hi .s9-item,
+    .s9-phase:not(.s9-phase-opt):hover .s9-item { color: rgba(255,255,255,.88); }
+    .s9-phase:not(.s9-phase-opt).s9-hi .s9-item::before,
+    .s9-phase:not(.s9-phase-opt):hover .s9-item::before { color: rgba(232,115,90,.6); }
+    /* Fase 4 items: muy apagados */
+    .s9-phase-opt .s9-item { color: rgba(255,255,255,.3); }
+    .s9-phase-opt .s9-item::before { color: rgba(255,255,255,.1); }
+
+    .s9-badge-opt {
+      margin-top: auto; padding-top: clamp(6px,.8vh,10px);
+      display: inline-flex; align-items: center;
+      font-size: clamp(9px,.72vw,11px); font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; color: rgba(255,255,255,.2);
+      background: rgba(255,255,255,.03); border: 1px dashed rgba(255,255,255,.08);
+      border-radius: 4px; padding: 3px clamp(6px,.55vw,9px); width: fit-content;
+    }
+
+    .s9-foot {
+      flex-shrink: 0; text-align: center; margin-top: clamp(10px,1.4vh,18px);
+      padding-top: clamp(6px,.8vh,10px); border-top: 1px solid rgba(255,255,255,.08);
+      font-size: clamp(10px,.8vw,13px); color: rgba(255,255,255,.52);
+      font-style: italic; opacity: 0;
+    }
+    .slide.active .s9-foot { animation: fadeIn .6s ease 1.5s forwards; }
+
+    /* =========================================
+       SLIDE 10: CIERRE
+       ========================================= */
+    #slide-9 { background: #fff; }
+
+    .s10-wrap {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      height: 100%; width: 100%;
+      padding: clamp(40px,6vh,80px) clamp(60px,8vw,120px);
+      gap: clamp(18px,2.8vh,36px);
+      position: relative; overflow: hidden;
+    }
+
+    /* Halo ambiental que respira */
+    .s10-glow {
+      position: absolute;
+      width: clamp(360px,55vw,800px); height: clamp(360px,55vw,800px);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(232,115,90,.07) 0%, transparent 68%);
+      top: 50%; left: 50%; transform: translate(-50%, -50%);
+      pointer-events: none;
+      animation: s10Breathe 5s ease-in-out infinite;
+    }
+    @keyframes s10Breathe {
+      0%, 100% { opacity: .55; transform: translate(-50%, -50%) scale(1); }
+      50%       { opacity: 1;   transform: translate(-50%, -50%) scale(1.1); }
+    }
+
+    /* Logos */
+    .s10-logos {
+      display: flex; align-items: center; gap: clamp(28px,4vw,64px);
+      opacity: 0;
+    }
+    .slide.active .s10-logos { animation: fadeUp .8s ease .2s forwards; }
+
+    .s10-logo-kalida img {
+      height: clamp(54px,6.5vh,92px); width: auto; object-fit: contain;
+    }
+    .s10-logo-connect img {
+      height: clamp(42px,5vh,72px); width: auto; object-fit: contain; border-radius: 8px;
+    }
+
+    /* Separador entre logos */
+    .s10-sep { display: flex; flex-direction: column; align-items: center; gap: 5px; flex-shrink: 0; }
+    .s10-sep-line {
+      width: 1px; height: clamp(18px,2.8vh,34px);
+      background: linear-gradient(to bottom, transparent, rgba(232,115,90,.45), transparent);
+    }
+    .s10-sep-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: #E8735A;
+      box-shadow: 0 0 12px rgba(232,115,90,.55);
+    }
+
+    /* Titular principal */
+    .s10-headline {
+      font-size: clamp(22px,2.9vw,48px); font-weight: 800;
+      color: #14213d; line-height: 1.2; text-align: center;
+      letter-spacing: -.022em; max-width: 78%;
+      opacity: 0;
+    }
+    .slide.active .s10-headline { animation: fadeUp .9s ease .5s forwards; }
+    .s10-hl-accent { color: #E8735A; }
+
+    /* Subtítulo / frase estratégica */
+    .s10-subline {
+      font-size: clamp(13px,1.3vw,21px); color: rgba(20,33,61,.45);
+      text-align: center; max-width: 64%; line-height: 1.6;
+      font-style: italic; opacity: 0;
+    }
+    .slide.active .s10-subline { animation: fadeUp .8s ease .82s forwards; }
+
+    /* Línea decorativa */
+    .s10-divider {
+      width: clamp(44px,5vw,72px); height: 1.5px;
+      background: linear-gradient(90deg, transparent, #E8735A, transparent);
+      opacity: 0;
+    }
+    .slide.active .s10-divider { animation: fadeIn .6s ease 1.1s forwards; }
+
+    /* Botones CTA */
+    .s10-ctas {
+      display: flex; gap: clamp(12px,1.5vw,20px); flex-wrap: wrap; justify-content: center;
+      opacity: 0;
+    }
+    .slide.active .s10-ctas { animation: fadeUp .7s ease 1.25s forwards; }
+
+    .s10-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: clamp(12px,1.1vw,16px); font-weight: 700; letter-spacing: .02em;
+      border-radius: 100px; padding: clamp(10px,1.3vh,16px) clamp(22px,2.5vw,36px);
+      text-decoration: none; border: none;
+      transition: transform .22s ease, box-shadow .22s ease, background .22s ease;
+      cursor: pointer;
+    }
+    .s10-btn:hover { transform: translateY(-2px); }
+    .s10-btn-primary {
+      background: #E8735A; color: #fff;
+      box-shadow: 0 4px 18px rgba(232,115,90,.28);
+    }
+    .s10-btn-primary:hover { box-shadow: 0 8px 30px rgba(232,115,90,.45); }
+    .s10-btn-outline {
+      background: transparent; color: #E8735A;
+      border: 1.5px solid rgba(232,115,90,.42);
+    }
+    .s10-btn-outline:hover { background: rgba(232,115,90,.06); border-color: #E8735A; }
+
+    /* Pie de diapositiva */
+    .s10-footer {
+      font-size: clamp(9px,.72vw,11px); color: rgba(20,33,61,.2);
+      letter-spacing: .12em; text-transform: uppercase;
+      position: absolute; bottom: clamp(16px,2.5vh,28px);
+      opacity: 0;
+    }
+    .slide.active .s10-footer { animation: fadeIn .6s ease 1.7s forwards; }
+
+    /* Toast — maximizar ventana */
+    .toast-hint {
+      position: fixed;
+      bottom: 72px;
+      left: 2vw;
+      z-index: 300;
+      display: flex;
+      align-items: center;
+      gap: 1.2vw;
+      background: rgba(8, 18, 36, 0.86);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 10px;
+      padding: .7vh 1.1vw;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity .5s ease, transform .5s ease;
+      pointer-events: none;
+    }
+    .toast-hint.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .toast-msg {
+      font-size: .82vw;
+      color: rgba(255,255,255,.68);
+      white-space: nowrap;
+      line-height: 1;
+    }
+    .toast-msg strong {
+      color: rgba(255,255,255,.9);
+      font-weight: 600;
+    }
+    .toast-ok {
+      background: none;
+      border: 1px solid rgba(232,115,90,.45);
+      border-radius: 5px;
+      color: #E8735A;
+      font-size: .72vw;
+      font-weight: 700;
+      letter-spacing: .1em;
+      padding: .3vh .7vw;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background .2s ease, border-color .2s ease;
+    }
+    .toast-ok:hover {
+      background: rgba(232,115,90,.12);
+      border-color: rgba(232,115,90,.75);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="slider-container">
+
+    <div class="slide active" id="slide-0">
+      <div class="s1-wrap">
+        <div class="logo-wrap">
+          <img src="img/KALIDA2_RGB.png" alt="Kālida" style="height:12vh; display:block;">
+        </div>
+        <div class="rule"></div>
+        <div class="foundation">Fundación <span>Kālida</span></div>
+        <div class="s1-title">Plan de Transformación Digital</div>
+        <div class="date-badge">
+          <span class="year">2026</span>
+          <span class="sep">—</span>
+          <span class="year">2028</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide" id="slide-1">
+      <div class="s2-wrap">
+        <div class="s2-left">
+          <div class="tag">Ecosistema digital · Hoy</div>
+          <div class="s2-title">La web de<br>Kālida hoy</div>
+          <p class="s2-sub">Todo lo que la fundación ofrece al mundo pasa por un único punto digital.</p>
+          <div class="module-list" id="module-list"></div>
+        </div>
+        <div class="s2-right">
+          <div class="browser-wrap">
+            <div class="progress-bar" id="progress-bar"></div>
+            <div class="browser">
+              <div class="b-bar">
+                <div class="b-dot b-r"></div>
+                <div class="b-dot b-y"></div>
+                <div class="b-dot b-g"></div>
+                <div class="b-url">fundaciokalida.org</div>
+              </div>
+              <div class="b-screen" id="browser-screen"></div>
+            </div>
+            <div class="browser-label">
+              <span class="bl-num" id="bl-num"></span>
+              <div class="bl-sep"></div>
+              <span class="bl-name" id="bl-name"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide" id="slide-2">
+      <div class="s3-wrap">
+        <div class="s3-left">
+          <div class="sphere-wrapper">
+            <div class="sphere-stage">
+              <div class="ring ring-1"></div>
+              <div class="ring ring-2"></div>
+              <div class="ring ring-3"></div>
+              <div class="ring ring-4"></div>
+              <div class="sphere">
+                <div class="sphere-glow"></div>
+                <div class="sphere-browser">
+                  <div class="sb-bar">
+                    <div class="sb-dot sb-r"></div>
+                    <div class="sb-dot sb-y"></div>
+                    <div class="sb-dot sb-g"></div>
+                    <div class="sb-url"></div>
+                  </div>
+                  <div class="sb-screen">
+                    <div class="sw-nav"></div>
+                    <div class="sw-hero">
+                      <div class="sw-htx">
+                        <div class="sw-h1"></div>
+                        <div class="sw-h2"></div>
+                        <div class="sw-h3"></div>
+                      </div>
+                      <div class="sw-himg"></div>
+                    </div>
+                    <div class="sw-grid">
+                      <div class="sw-card">
+                        <div class="sw-ci"></div>
+                        <div class="sw-ct"></div>
+                        <div class="sw-cd"></div>
+                      </div>
+                      <div class="sw-card">
+                        <div class="sw-ci"></div>
+                        <div class="sw-ct"></div>
+                        <div class="sw-cd"></div>
+                      </div>
+                      <div class="sw-card">
+                        <div class="sw-ci"></div>
+                        <div class="sw-ct"></div>
+                        <div class="sw-cd"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="sphere-glass"></div>
+                <div class="sphere-rim"></div>
+                <div class="sphere-shimmer"></div>
+              </div>
+            </div>
+            <div class="sphere-label">Sitio Web Kālida en Wordpress</div>
+          </div>
+        </div>
+        <div class="connector">
+          <div class="channel channel-fwd">
+            <div class="ch-meta"><span class="ch-from">Web</span><span class="ch-arrow">→</span><span
+                class="ch-to">Sinergia</span></div>
+            <div class="ch-track">
+              <div class="packet"></div>
+              <div class="packet"></div>
+              <div class="packet"></div>
+            </div>
+          </div>
+          <div class="ch-separator"></div>
+          <div class="channel channel-bwd">
+            <div class="ch-meta"><span class="ch-from">Sinergia</span><span class="ch-arrow">←</span><span
+                class="ch-to">Web</span></div>
+            <div class="ch-track">
+              <div class="packet"></div>
+              <div class="packet"></div>
+              <div class="packet"></div>
+            </div>
+          </div>
+        </div>
+        <div class="s3-right">
+          <div class="tag">Sistema de Gestión Interna</div>
+          <div class="s3-title">Sinergia CRM</div>
+          <p class="s3-sub">El motor administrativo de Kālida. Centraliza la operativa interna y sincroniza en tiempo
+            real todo lo que la web necesita publicar.</p>
+          <div class="feature-list">
+            <div class="feature-item">
+              <div class="fi-icon">
+                <div class="fi-dot"></div>
+              </div>
+              <div>
+                <div class="fi-name">Gestión administrativa completa</div>
+                <div class="fi-desc">Presupuestos, facturación, proveedores y control económico de la fundación.</div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <div class="fi-icon">
+                <div class="fi-dot"></div>
+              </div>
+              <div>
+                <div class="fi-name">Pacientes, familias y voluntariado</div>
+                <div class="fi-desc">Registro, historial y seguimiento de todas las personas vinculadas a Kālida.</div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <div class="fi-icon">
+                <div class="fi-dot"></div>
+              </div>
+              <div>
+                <div class="fi-name">Agenda y actividades</div>
+                <div class="fi-desc">Talleres, grupos y eventos gestionados internamente y publicados automáticamente en
+                  la web.</div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <div class="fi-icon">
+                <div class="fi-dot"></div>
+              </div>
+              <div>
+                <div class="fi-name">Informes y métricas de impacto</div>
+                <div class="fi-desc">Reporting para donantes e instituciones generado desde los datos reales de
+                  Sinergia.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- ─── SLIDE 4: ANATOMÍA DE UN PROCESO ROTO ─── -->
+    <div class="slide" id="slide-3">
+      <div class="s4-wrap">
+
+        <!-- HEADER -->
+        <div class="s4-head">
+          <div class="tag">Operativa Actual</div>
+          <div class="s4-title">Anatomía de un proceso roto</div>
+          <p class="s4-sub">Publicar un taller requiere intervención manual en cada paso. Y cada nuevo módulo hereda exactamente el mismo problema.</p>
+        </div>
+
+        <!-- FLOW -->
+        <div class="s4-flow-zone">
+          <div class="s4-zone-label">El flujo de un taller · de Sinergia a WordPress</div>
+          <div class="flow-track">
+
+            <div class="flow-node-wrap">
+              <div class="flow-node fn-system">
+                <span class="fn-num">01</span>
+              </div>
+              <div class="fn-role fn-role-sys">Psicooncóloga</div>
+              <div class="fn-action">Crea el taller en Sinergia CRM</div>
+            </div>
+
+            <div class="flow-node-wrap">
+              <div class="flow-node fn-auto">
+                <span class="fn-num">02</span>
+              </div>
+              <div class="fn-badge fn-badge-auto">Auto</div>
+              <div class="fn-role fn-role-sys">Sinergia → WP</div>
+              <div class="fn-action">Genera un borrador en WordPress</div>
+            </div>
+
+            <div class="flow-node-wrap">
+              <div class="flow-node fn-manual">
+                <span class="fn-num">03</span>
+              </div>
+              <div class="fn-badge fn-badge-manual">Manual</div>
+              <div class="fn-role fn-role-manual">Becario</div>
+              <div class="fn-action">Revisa y edita el borrador</div>
+            </div>
+
+            <div class="flow-node-wrap">
+              <div class="flow-node fn-manual">
+                <span class="fn-num">04</span>
+              </div>
+              <div class="fn-badge fn-badge-manual">Manual</div>
+              <div class="fn-role fn-role-manual">Becario</div>
+              <div class="fn-action">Publica manualmente en WordPress</div>
+            </div>
+
+            <div class="flow-node-wrap">
+              <div class="flow-node fn-alert">
+                <span class="fn-num">05</span>
+              </div>
+              <div class="fn-role fn-role-alert">Becario / Externo</div>
+              <div class="fn-action">Errores básicos: becario · Errores graves: proveedor externo</div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- BOTTOM -->
+        <div class="s4-bottom">
+
+          <!-- Silos -->
+          <div class="s4-silos">
+            <div class="s4-zone-label-static">Tres silos sin conexión real</div>
+            <div class="silo-row">
+              <div class="silo-block silo-excel">
+                <div class="silo-name">Excel</div>
+                <div class="silo-items">
+                  <div class="silo-item">Psicooncólogas</div>
+                  <div class="silo-item">Administrativo</div>
+                </div>
+              </div>
+              <div class="silo-connector">
+                <div class="silo-conn-line"></div>
+                <div class="silo-conn-x">✕</div>
+                <div class="silo-conn-line"></div>
+              </div>
+              <div class="silo-block silo-sinergia">
+                <div class="silo-name">Sinergia</div>
+                <div class="silo-items">
+                  <div class="silo-item">CRM principal</div>
+                  <div class="silo-item">Datos parciales</div>
+                </div>
+              </div>
+              <div class="silo-connector">
+                <div class="silo-conn-line"></div>
+                <div class="silo-conn-x">✕</div>
+                <div class="silo-conn-line"></div>
+              </div>
+              <div class="silo-block silo-wp">
+                <div class="silo-name">WordPress</div>
+                <div class="silo-items">
+                  <div class="silo-item">Web pública</div>
+                  <div class="silo-item">Sistema cerrado</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Diagnosis -->
+          <div class="s4-diagnosis">
+            <div class="s4-zone-label-static">Por qué no podemos escalar</div>
+
+            <div class="diag-item">
+              <div class="diag-num">01</div>
+              <div class="diag-body">
+                <div class="diag-title">WordPress como monolito cerrado</div>
+                <div class="diag-desc">Sin API pública ni modelo de datos compartido. Cualquier integración nueva exige desarrollo desde cero.</div>
+              </div>
+            </div>
+
+            <div class="diag-item">
+              <div class="diag-num">02</div>
+              <div class="diag-body">
+                <div class="diag-title">Cada módulo nuevo hereda el problema</div>
+                <div class="diag-desc"><strong>Iniciativas Solidarias</strong> seguirá el mismo ciclo — borrador, revisión manual, publicación manual. La fricción crece con la organización.</div>
+              </div>
+            </div>
+
+            <div class="diag-item">
+              <div class="diag-num">03</div>
+              <div class="diag-body">
+                <div class="diag-title">Sin capacidad técnica interna</div>
+                <div class="diag-desc">Errores graves externalizados. Datos clave en Excel fuera de Sinergia. La organización escala en hojas de cálculo, no en infraestructura.</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ─── SLIDE 5: UN PROCESO ROTO SE MULTIPLICA ─── -->
+    <div class="slide" id="slide-4">
+      <div class="s5-wrap">
+
+        <div class="s5-head">
+          <div class="tag">El problema de escalar</div>
+          <div class="s5-title">Un proceso roto se multiplica</div>
+          <p class="s5-sub">Abrir el Centro 2 en Granollers no duplica solo el espacio. Duplica cada proceso manual, cada error, y cada dato que hoy no se registra.</p>
+        </div>
+
+        <div class="s5-centers">
+
+          <div class="s5-photo-wrap s5-photo-left">
+            <img src="img/kalida1.jpg" alt="Centro 1 · Barcelona">
+            <div class="s5-photo-overlay"></div>
+            <div class="s5-photo-label">
+              <div class="s5-photo-tag">Centro 1 · Barcelona · Activo</div>
+              <div class="s5-photo-name">Fundació Kālida</div>
+              <div class="s5-pp">Publicación manual de talleres</div>
+              <div class="s5-pp">Gestión de errores por becario</div>
+              <div class="s5-pp">Datos en Excel fuera de Sinergia</div>
+            </div>
+          </div>
+
+          <div class="s5-multiplier">
+            <div class="s5-x2">×2</div>
+            <div class="s5-x2-line"></div>
+            <div class="s5-x2-caption">Lo que sale mal, sale mal dos veces</div>
+          </div>
+
+          <div class="s5-photo-wrap s5-photo-right">
+            <img src="img/kalida2.png" alt="Centro 2 · Granollers">
+            <div class="s5-photo-overlay" style="background:linear-gradient(to top, rgba(12,28,52,.98) 0%, rgba(12,28,52,.82) 50%, rgba(12,28,52,.3) 100%);"></div>
+            <div class="s5-photo-label">
+              <div class="s5-photo-tag">Centro 2 · Granollers · Proximamente</div>
+              <div class="s5-photo-name">Kālida Granollers</div>
+              <div class="s5-pp s5-pp-unknown">¿Quién gestiona los talleres?</div>
+              <div class="s5-pp s5-pp-unknown">¿Quién resuelve los errores web?</div>
+              <div class="s5-pp s5-pp-unknown">¿Otro Excel? ¿Otro becario?</div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="s5-fractures">
+
+          <div class="s5-frac">
+            <div class="s5-frac-x">×2</div>
+            <div class="s5-frac-title">Error humano</div>
+            <div class="s5-frac-desc">Dos flujos de revisión sin trazabilidad. <strong>Sin sistema no hay forma de saber quién cambió qué, ni cuándo.</strong></div>
+          </div>
+
+          <div class="s5-frac">
+            <div class="s5-frac-x">×2</div>
+            <div class="s5-frac-title">Tiempo manual</div>
+            <div class="s5-frac-desc">Cada taller, publicación y corrección multiplicada por dos centros. <strong>El becario no escala. El tiempo, tampoco.</strong></div>
+          </div>
+
+          <div class="s5-frac">
+            <div class="s5-frac-x">×2</div>
+            <div class="s5-frac-title">Datos invisibles</div>
+            <div class="s5-frac-desc">Lo que hoy no entra a Sinergia, tampoco entrará mañana. <strong>Dos centros, dos hojas de Excel, cero visibilidad para los donantes.</strong></div>
+          </div>
+
+          <div class="s5-frac">
+            <div class="s5-frac-x">∞</div>
+            <div class="s5-frac-title">Sin base para crecer</div>
+            <div class="s5-frac-desc">WordPress no puede orquestar dos centros. <strong>Cada nuevo módulo exige refactorizar desde cero.</strong></div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ─── SLIDE 6: KĀLIDA CONNECT REVEAL ─── -->
+    <div class="slide" id="slide-5">
+      <div class="s6-wrap">
+
+        <div class="s6-intro">Y como solución, presentamos a:</div>
+
+        <div class="s6-brand" id="s6-brand">
+          <video id="kc-video" class="s6-video" muted playsinline>
+            <source src="img/kalida-connect.mov" type="video/quicktime">
+            <source src="img/kalida-connect.mov" type="video/mp4">
+          </video>
+          <img src="img/logo-kalida-connect.jpg" id="kc-fallback" class="s6-fallback" alt="Kālida Connect">
+        </div>
+
+        <div class="s6-tagline" id="kc-tagline">
+          Del proceso manual a la automatización real —<br>
+          <strong>La infraestructura digital diseñada para que el equipo se centre en lo que de verdad importa: las personas.</strong>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Slide 7 — Kālida Connect API -->
+    <div class="slide" id="slide-6">
+      <div class="s7-wrap">
+
+        <!-- SVG spokes — 4 nodos en cuadrantes, hub en (960,540) -->
+        <svg class="s7-svg" viewBox="0 0 1920 1080" preserveAspectRatio="none">
+          <!-- Sinergia ↔ Hub -->
+          <line class="s7-spoke s7-sp-solid s7-sp1" x1="960" y1="540" x2="350"  y2="200"/>
+          <!-- Hub ↔ WordPress -->
+          <line class="s7-spoke s7-sp-solid s7-sp2" x1="960" y1="540" x2="1570" y2="200"/>
+          <!-- Centros Físicos → Hub -->
+          <line class="s7-spoke s7-sp-solid s7-sp3" x1="960" y1="540" x2="350"  y2="880"/>
+          <!-- Hub → App Móvil (futuro) -->
+          <line class="s7-spoke s7-sp-future s7-sp4" x1="960" y1="540" x2="1570" y2="880"/>
+        </svg>
+
+        <!-- Direction chips en los puntos medios de cada línea -->
+        <div class="s7-dir s7-dir1">↔ bidireccional</div>
+        <div class="s7-dir s7-dir2">↔ bidireccional</div>
+        <div class="s7-dir s7-dir3">→ entrada</div>
+        <div class="s7-dir s7-dir4">→ salida</div>
+
+        <!-- Hub logo -->
+        <div class="s7-hub">
+          <img src="img/logo-kalida-connect.jpg" alt="Kālida Connect">
+        </div>
+
+        <!-- Title -->
+        <div class="s7-title">La centralita que lo conecta todo</div>
+
+        <!-- Sinergia — top-left -->
+        <div class="s7-np s7-np1">
+          <div class="s7-node">
+            <div class="s7-icon s7-icon-sinergia">
+              <img src="img/sinergia-crm.png" alt="Sinergia CRM">
+            </div>
+            <div>
+              <div class="s7-node-title">Sinergia CRM</div>
+              <div class="s7-chips">
+                <span class="s7-chip">Pacientes</span>
+                <span class="s7-chip">Eventos</span>
+                <span class="s7-chip">Economía</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- WordPress — top-right -->
+        <div class="s7-np s7-np2">
+          <div class="s7-node">
+            <div class="s7-icon s7-icon-wp">
+              <img src="img/wp-logo.png" alt="WordPress">
+            </div>
+            <div>
+              <div class="s7-node-title">WordPress</div>
+              <div class="s7-chips">
+                <span class="s7-chip">Agenda</span>
+                <span class="s7-chip">Tienda</span>
+                <span class="s7-chip">Blog</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Centros Físicos ×2 — bottom-left -->
+        <div class="s7-np s7-np3">
+          <div class="s7-node">
+            <div class="s7-icon s7-icon-centro">
+              <img src="img/hogar.png" alt="Centros Físicos">
+              <div class="s7-badge-x2">×2</div>
+            </div>
+            <div>
+              <div class="s7-node-title">Centros Físicos</div>
+              <div class="s7-chips">
+                <span class="s7-chip">Aforo</span>
+                <span class="s7-chip">Registros</span>
+                <span class="s7-chip">Informes</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- App Móvil — bottom-right (futuro) -->
+        <div class="s7-np s7-np4">
+          <div class="s7-node">
+            <div class="s7-icon s7-icon-app">
+              <img src="img/app.png" alt="App Móvil">
+              <div class="s7-badge-future">Futuro</div>
+            </div>
+            <div>
+              <div class="s7-node-title">App Móvil</div>
+              <div class="s7-chips">
+                <span class="s7-chip">Notificaciones</span>
+                <span class="s7-chip">Impacto</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ─── SLIDE 8: ARQUITECTURA TÉCNICA ─── -->
+    <div class="slide" id="slide-7">
+      <div class="s8-wrap">
+
+        <div class="s8-eyebrow">Arquitectura Técnica · Infraestructura</div>
+
+        <div class="s8-infra">
+
+          <!-- Servidor externo: Sinergia -->
+          <div class="s8-server s8-ext">
+            <div class="s8-srv-hd">
+              <img src="img/server1.png" class="s8-srv-img" alt="Servidor externo">
+              <div class="s8-srv-meta">
+                <div class="s8-srv-name">Nube Externa</div>
+                <div class="s8-srv-env">Gestionado por Sinergia S.A. · No controlado por Kālida</div>
+              </div>
+              <div class="s8-srv-badges">
+                <span class="s8-srv-badge s8-badge-blue">SaaS</span>
+                <span class="s8-srv-badge s8-badge-green">Online</span>
+              </div>
+            </div>
+
+            <div class="s8-box">
+              <div class="s8-box-hd">
+                <img src="img/sinergia-crm.jpg" class="s8-box-icon s8-icon-round" alt="Sinergia CRM">
+                <div class="s8-box-name">Sinergia CRM</div>
+              </div>
+              <div class="s8-chips">
+                <span class="s8-chip">REST API</span>
+                <span class="s8-chip">HTTPS · 443</span>
+                <span class="s8-chip">OAuth 2.0</span>
+                <span class="s8-chip">JSON</span>
+              </div>
+              <div class="s8-box-note">Pacientes · Eventos · Economía · Informes · Histórico</div>
+            </div>
+
+            <div class="s8-endpoints">
+              <div class="s8-endpoints-label">Endpoints que consume la API</div>
+              <div class="s8-chips">
+                <span class="s8-chip blue">GET /patients</span>
+                <span class="s8-chip blue">GET /events</span>
+                <span class="s8-chip blue">POST /sync</span>
+                <span class="s8-chip blue">GET /economy</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Conexión -->
+          <div class="s8-conn">
+            <div class="s8-conn-dash"></div>
+            <div class="s8-conn-arr">↔</div>
+            <div class="s8-conn-label">HTTPS<br>REST · JSON<br>Bidireccional</div>
+            <div class="s8-conn-dash"></div>
+          </div>
+
+          <!-- Nuestro servidor -->
+          <div class="s8-server s8-own">
+            <div class="s8-srv-hd">
+              <img src="img/server2.png" class="s8-srv-img" alt="Servidor Kālida">
+              <div class="s8-srv-meta">
+                <div class="s8-srv-name">Servidor Kālida</div>
+                <div class="s8-srv-env">VPS · Ubuntu 22.04 LTS · SSL/TLS · Firewall UFW</div>
+              </div>
+              <div class="s8-srv-badges">
+                <span class="s8-srv-badge s8-badge-orange">Propio</span>
+                <span class="s8-srv-badge s8-badge-green">99.9%</span>
+              </div>
+            </div>
+
+            <div class="s8-box">
+              <div class="s8-box-hd">
+                <div class="s8-box-icon s8-icon-wp"><img src="img/wp-logo.png" alt="WordPress"></div>
+                <div class="s8-box-name">WordPress</div>
+              </div>
+              <div class="s8-chips">
+                <span class="s8-chip">PHP 8.2</span>
+                <span class="s8-chip">MySQL 8.0</span>
+                <span class="s8-chip">WooCommerce</span>
+                <span class="s8-chip">Puerto 443</span>
+              </div>
+              <div class="s8-box-note">Agenda · Tienda · Blog · Formularios · Campañas · Iniciativas</div>
+            </div>
+
+            <div class="s8-box s8-box-api">
+              <div class="s8-box-hd">
+                <img src="img/logo-kalida-connect.jpg" class="s8-box-icon s8-icon-round" alt="Kālida Connect">
+                <div class="s8-box-name">Kālida Connect API</div>
+                <span class="s8-srv-badge s8-badge-orange">Orquestador</span>
+              </div>
+              <div class="s8-chips">
+                <span class="s8-chip hi">REST · JSON</span>
+                <span class="s8-chip hi">JWT Auth</span>
+                <span class="s8-chip hi">Webhooks</span>
+                <span class="s8-chip">Puerto 443</span>
+              </div>
+              <div class="s8-box-note">Sincronización · Automatización · Centralización · Informes unificados</div>
+            </div>
+
+            <div class="s8-box s8-box-future">
+              <div class="s8-box-hd">
+                <div class="s8-future-dot">+</div>
+                <div class="s8-box-name s8-box-name-dim">Nueva funcionalidad futura</div>
+                <span class="s8-srv-badge s8-badge-dim">Roadmap</span>
+              </div>
+              <div class="s8-box-note">Módulos adicionales conectados vía Kālida Connect API — analítica avanzada, automatización de comunicaciones y reporting unificado entre centros.</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Divider hacia clientes -->
+        <div class="s8-bridge">
+          <div class="s8-bridge-line"></div>
+          <div class="s8-bridge-label">↓ &nbsp; Dispositivos y clientes conectados vía Kālida Connect API &nbsp; ↓</div>
+          <div class="s8-bridge-line"></div>
+        </div>
+
+        <!-- Clientes / endpoints finales -->
+        <div class="s8-clients">
+
+          <div class="s8-client">
+            <div class="s8-client-hd">
+              <div class="s8-client-dot s8-dot-active"></div>
+              <div class="s8-client-name">Centro Físico 1 · Barcelona</div>
+            </div>
+            <div class="s8-client-sub">Activo · Integración completa</div>
+            <div class="s8-client-chips">
+              <span class="s8-chip">HTTPS</span>
+              <span class="s8-chip">Aforo en tiempo real</span>
+              <span class="s8-chip">Registros</span>
+              <span class="s8-chip">Informes</span>
+            </div>
+          </div>
+
+          <div class="s8-client">
+            <div class="s8-client-hd">
+              <div class="s8-client-dot s8-dot-pending"></div>
+              <div class="s8-client-name">Centro Físico 2 · Granollers</div>
+            </div>
+            <div class="s8-client-sub">En integración · Apertura 2028</div>
+            <div class="s8-client-chips">
+              <span class="s8-chip">HTTPS</span>
+              <span class="s8-chip">Aforo en tiempo real</span>
+              <span class="s8-chip">Registros</span>
+              <span class="s8-chip">Informes</span>
+            </div>
+          </div>
+
+          <div class="s8-client s8-client-future">
+            <div class="s8-client-hd">
+              <div class="s8-client-dot s8-dot-future"></div>
+              <div class="s8-client-name">App Móvil</div>
+              <span class="s8-srv-badge s8-badge-dim">Futuro</span>
+            </div>
+            <div class="s8-client-sub">iOS · Android · 2027</div>
+            <div class="s8-client-chips">
+              <span class="s8-chip">OAuth 2.0</span>
+              <span class="s8-chip">Push Notifications</span>
+              <span class="s8-chip">Impacto directo</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ─── SLIDE 9: LAS FASES DEL PROYECTO ─── -->
+    <div class="slide" id="slide-8">
+      <div class="s9-wrap">
+
+        <div class="s9-hd">
+          <div class="s9-eyebrow">Plan de Ejecución · 2026 — 2028</div>
+          <div class="s9-title">Las fases del proyecto</div>
+        </div>
+
+        <div class="s9-timeline">
+          <div class="s9-rail-bg"></div>
+          <div class="s9-rail-fill"></div>
+
+          <div class="s9-phases">
+
+            <!-- Fase 0 -->
+            <div class="s9-phase" id="s9ph0">
+              <div class="s9-node">0</div>
+              <div class="s9-gap"></div>
+              <div class="s9-card" data-n="0">
+                <div class="s9-phase-lbl">Fase 0</div>
+                <div class="s9-phase-name">Liderazgo & BI</div>
+                <div class="s9-phase-date">2026 · Q3</div>
+                <ul class="s9-items">
+                  <li class="s9-item">Perfil BI / Project Lead</li>
+                  <li class="s9-item">Auditoría datos en Sinergia</li>
+                  <li class="s9-item">KPIs de impacto y reporting</li>
+                  <li class="s9-item">Gobernanza y arquitectura</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Fase 1 -->
+            <div class="s9-phase" id="s9ph1">
+              <div class="s9-node">1</div>
+              <div class="s9-gap"></div>
+              <div class="s9-card" data-n="1">
+                <div class="s9-phase-lbl">Fase 1</div>
+                <div class="s9-phase-name">API + Integración</div>
+                <div class="s9-phase-date">2026 · Q4</div>
+                <ul class="s9-items">
+                  <li class="s9-item">Construcción Kālida Connect API</li>
+                  <li class="s9-item">Integración Sinergia ↔ WordPress</li>
+                  <li class="s9-item">Publicación automática actividades</li>
+                  <li class="s9-item">Webhooks y documentación</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Fase 2 -->
+            <div class="s9-phase" id="s9ph2">
+              <div class="s9-node">2</div>
+              <div class="s9-gap"></div>
+              <div class="s9-card" data-n="2">
+                <div class="s9-phase-lbl">Fase 2</div>
+                <div class="s9-phase-name">Nueva Web</div>
+                <div class="s9-phase-date">2027 · Q1</div>
+                <ul class="s9-items">
+                  <li class="s9-item">Rediseño web completo</li>
+                  <li class="s9-item">Nueva experiencia de usuario</li>
+                  <li class="s9-item">Integración total con la API</li>
+                  <li class="s9-item">Tienda, Agenda y Blog unificados</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Fase 3 -->
+            <div class="s9-phase" id="s9ph3">
+              <div class="s9-node">3</div>
+              <div class="s9-gap"></div>
+              <div class="s9-card" data-n="3">
+                <div class="s9-phase-lbl">Fase 3</div>
+                <div class="s9-phase-name">Automatizaciones</div>
+                <div class="s9-phase-date">2027 · Q1–Q2</div>
+                <ul class="s9-items">
+                  <li class="s9-item">Aforo y registros en tiempo real</li>
+                  <li class="s9-item">Dashboard BI para donantes</li>
+                  <li class="s9-item">Comunicaciones automáticas</li>
+                  <li class="s9-item">Reporting unificado por centros</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Fase 4 — Opcional -->
+            <div class="s9-phase s9-phase-opt" id="s9ph4">
+              <div class="s9-node">4</div>
+              <div class="s9-gap"></div>
+              <div class="s9-card" data-n="4">
+                <div class="s9-phase-lbl">Fase 4</div>
+                <div class="s9-phase-name">App Móvil</div>
+                <div class="s9-phase-date">Opcional · 2027+</div>
+                <ul class="s9-items">
+                  <li class="s9-item">App pacientes y cuidadores</li>
+                  <li class="s9-item">Agenda, inscripciones y push</li>
+                  <li class="s9-item">Extensión a Granollers</li>
+                  <li class="s9-item">Base futuros centros Kālida</li>
+                </ul>
+                <div class="s9-badge-opt">No comprometida</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="s9-foot">Cada fase entrega valor independiente · La inversión puede estructurarse por etapas</div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SLIDE 10: CIERRE -->
+  <div class="slide" id="slide-9">
+    <div class="s10-wrap">
+
+      <!-- Halo ambiental -->
+      <div class="s10-glow"></div>
+
+      <!-- Logos -->
+      <div class="s10-logos">
+        <div class="s10-logo-kalida">
+          <img src="img/KALIDA2_RGB.png" alt="Fundació Kālida">
+        </div>
+        <div class="s10-sep">
+          <div class="s10-sep-line"></div>
+          <div class="s10-sep-dot"></div>
+          <div class="s10-sep-line"></div>
+        </div>
+        <div class="s10-logo-connect">
+          <img src="img/logo-kalida-connect.jpg" alt="Kālida Connect">
+        </div>
+      </div>
+
+      <!-- Titular -->
+      <div class="s10-headline">
+        La tecnología no reemplaza el cuidado.<br>
+        <span class="s10-hl-accent">Lo multiplica.</span>
+      </div>
+
+      <!-- Frase estratégica -->
+      <div class="s10-subline">
+        Una inversión en infraestructura digital es una inversión en acompañamiento a escala.
+      </div>
+
+      <!-- Línea decorativa -->
+      <div class="s10-divider"></div>
+
+      <!-- CTAs -->
+      <div class="s10-ctas">
+        <a href="https://fundaciokalida.org" target="_blank" class="s10-btn s10-btn-primary">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          fundaciokalida.org
+        </a>
+        <a href="mailto:info@fundaciokalida.org?subject=Kālida Connect — Solicitud de propuesta técnica" class="s10-btn s10-btn-outline">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Solicitar propuesta técnica
+        </a>
+      </div>
+
+      <!-- Pie -->
+      <div class="s10-footer">2026 · Propuesta confidencial · Fundació Kālida</div>
+
+    </div>
+  </div>
+
+  <div class="nav-bar">
+    <img src="img/logo_blanco.png" alt="Kālida" class="nav-logo" id="nav-logo">
+    <div class="nav-arrows">
+      <div class="narr prev-btn">←</div>
+    </div>
+    <div class="nav-hint" id="nav-hint-text">Avanza para descubrir <span class="nh-arrow">→</span></div>
+    <div class="nav-dots" id="nav-dots-container">
+    </div>
+    <div class="nav-arrows">
+      <div class="narr next-btn">→</div>
+    </div>
+    <img src="img/logo-connect-blanco.png" alt="Kālida Connect" class="nav-logo-right" id="nav-logo-right">
+  </div>
+
+  <!-- Toast: maximizar ventana -->
+  <div class="toast-hint" id="toast-hint">
+    <span class="toast-msg">Para una mejor experiencia, <strong>maximiza esta ventana</strong></span>
+    <span class="toast-msg">Puede usar las flechas izquierda o derecha para <strong>adelante o atras</strong></span>
+    <button class="toast-ok" id="toast-ok">OK</button>
+  </div>
+
+  <script>
+    /* =======================================================
+       1. LÓGICA GLOBAL DEL SLIDER PRINCIPAL
+       ======================================================= */
+    const slides = document.querySelectorAll('.slide');
+    const dotsContainer = document.getElementById('nav-dots-container');
+    const navHint = document.getElementById('nav-hint-text');
+    const btnPrev = document.querySelector('.prev-btn');
+    const btnNext = document.querySelector('.next-btn');
+    const navLogo      = document.getElementById('nav-logo');
+    const navLogoRight = document.getElementById('nav-logo-right');
+
+   // Textos personalizados para la barra de navegación de cada slide
+    const navTexts = [
+      'Avanza para descubrir',
+      'Ecosistema digital · Slide 2',
+      'Sinergia · Slide 3',
+      'Operativa Actual · Slide 4',
+      'Escalabilidad · Slide 5',
+      'Kālida Connect · Slide 6',
+      'API Architecture · Slide 7',
+      'Infraestructura Técnica · Slide 8',
+      'Fases del Proyecto · Slide 9',
+      'Cierre · Slide 10'
+    ];
+
+    let currentSlide = 0;
+
+    // Generar dots dinámicamente según la cantidad de slides
+    slides.forEach((_, i) => {
+      const dot = document.createElement('div');
+      dot.className = 'ndot' + (i === 0 ? ' on' : '');
+      dot.addEventListener('click', () => goToSlide(i));
+      dotsContainer.appendChild(dot);
+    });
+
+    const dots = document.querySelectorAll('.ndot');
+
+    let kcVideoTimer = null;
+
+    function goToSlide(index) {
+      if (index < 0) index = slides.length - 1;
+      if (index >= slides.length) index = 0;
+
+      // Slide 2: parar ciclo al salir, reiniciar desde 0 al entrar
+      if (currentSlide === 1 && index !== 1) { clearInterval(timer); timer = null; }
+      if (index === 1) { startSlide2(); }
+
+      // Slide 9: ciclo de highlight por fases
+      if (currentSlide === 8 && index !== 8) { clearInterval(s9Timer); s9Timer = null; }
+      if (index === 8) { setTimeout(startSlide9, 1600); }
+
+      slides.forEach((slide, i) => {
+        slide.classList.remove('active', 'prev-slide');
+        // Para que la animación sepa de dónde viene el slide (derecha o izquierda)
+        if (i < index) {
+          slide.classList.add('prev-slide');
+        }
+      });
+
+      slides[index].classList.add('active');
+      currentSlide = index;
+
+      // Fondo oscuro en body solo en slide 7 (fondo #07111e) para cubrir gap de nav colapsada
+      document.body.classList.toggle('s7-active', index >= 6 && index <= 8);
+
+      // Actualizar UI de navegación
+      dots.forEach((dot, i) => dot.classList.toggle('on', i === index));
+      navHint.innerHTML = `${navTexts[index]} <span class="nh-arrow">→</span>`;
+      navLogo.classList.toggle('visible', index >= 1);
+      if (index < 5) {
+        navLogoRight.classList.remove('visible');
+      } else if (!navLogoRight.classList.contains('visible')) {
+        setTimeout(() => navLogoRight.classList.add('visible'), 350);
+      }
+
+      // Lógica del vídeo Kālida Connect (slide 6, índice 5)
+      if (index === 5) {
+        kcTagline.classList.remove('visible');
+        if (kcVideo.style.display !== 'none') {
+          kcVideo.currentTime = 0;
+          // Delay play to sync with brandReveal animation (1.6s delay)
+          kcVideoTimer = setTimeout(() => {
+            kcVideo.play().catch(() => {
+              kcVideo.style.display = 'none';
+              kcFallback.style.display = 'block';
+              setTimeout(() => { kcTagline.classList.add('visible'); }, 2200);
+            });
+          }, 1600);
+        } else {
+          setTimeout(() => { kcTagline.classList.add('visible'); }, 2200);
+        }
+      } else {
+        if (kcVideoTimer) { clearTimeout(kcVideoTimer); kcVideoTimer = null; }
+        kcVideo.pause();
+      }
+    }
+
+    btnPrev.addEventListener('click', () => goToSlide(currentSlide - 1));
+    btnNext.addEventListener('click', () => goToSlide(currentSlide + 1));
+
+    /* Navegación por teclado (Flechas) */
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') goToSlide(currentSlide + 1);
+      if (e.key === 'ArrowLeft') goToSlide(currentSlide - 1);
+    });
+
+    /* Nav bar: colapsar tras la animación de entrada (1.6s anim + 0.9s margen) */
+    const navBar = document.querySelector('.nav-bar');
+    setTimeout(() => navBar.classList.add('collapsed'), 2500);
+
+    /* =======================================================
+       LÓGICA SLIDE 6: KĀLIDA CONNECT VIDEO
+       ======================================================= */
+    const kcVideo   = document.getElementById('kc-video');
+    const kcFallback = document.getElementById('kc-fallback');
+    const kcTagline  = document.getElementById('kc-tagline');
+
+    kcVideo.addEventListener('ended', () => {
+      kcTagline.classList.add('visible');
+    });
+
+    kcVideo.addEventListener('error', () => {
+      kcVideo.style.display = 'none';
+      kcFallback.style.display = 'block';
+      setTimeout(() => { kcTagline.classList.add('visible'); }, 2200);
+    });
+
+    /* =======================================================
+       2. LÓGICA ESPECÍFICA DEL SLIDE 2 (Ecosistema)
+       ======================================================= */
+    const MODULES = [
+      { num: '01', name: 'Kālida Online', desc: 'Comunidad cerrada · registro de usuarios y recursos digitales', img: 'img/kalida-online.jpg' },
+      { num: '02', name: 'Tienda Solidaria', desc: 'Productos solidarios gestionados con WooCommerce', img: 'img/shop.jpg' },
+      { num: '03', name: 'Agenda', desc: 'Talleres, actividades e inscripciones en tiempo real', img: 'img/agenda.jpg' },
+      { num: '04', name: 'Blog y Noticias', desc: 'Contenido editorial y artículos divulgativos', img: 'img/blog.jpg' },
+      { num: '05', name: 'Formularios de Donativos', desc: 'Captación de fondos y socios recurrentes', img: 'img/forms.jpg' },
+      { num: '06', name: 'Campañas', desc: 'Campañas de publicidad integradas en la plataforma', img: 'img/campaings.jpg' },
+      { num: '07', name: 'Iniciativas Solidarias', desc: 'Colaboración, voluntariado y captación de apoyo', img: 'img/initiatives.jpg' },
+    ];
+
+    const INTERVAL = 3500;
+    let revealed = 0; let activeIdx = -1; let hovered = false; let timer = null;
+
+    const listEl = document.getElementById('module-list');
+    const screenEl = document.getElementById('browser-screen');
+    const blNum = document.getElementById('bl-num');
+    const blName = document.getElementById('bl-name');
+    const progressEl = document.getElementById('progress-bar');
+
+    MODULES.forEach((mod, i) => {
+      // Lista
+      const item = document.createElement('div');
+      item.className = 'module-item';
+      item.innerHTML = `<div class="module-row"><span class="module-num">${mod.num}</span><span class="module-name">${mod.name}</span></div><div class="module-desc">${mod.desc}</div>`;
+      item.addEventListener('mouseenter', () => { if (!item.classList.contains('visible')) return; hovered = true; pauseProgress(); setActiveModule(i); });
+      item.addEventListener('mouseleave', () => { hovered = false; resumeTimer(); });
+      listEl.appendChild(item);
+
+      // Slots del navegador
+      const slot = document.createElement('div');
+      slot.className = 'img-slot';
+      if (mod.img) {
+        slot.innerHTML = `<img src="${mod.img}" alt="${mod.name}">`;
+      } else {
+        slot.innerHTML = `<div class="img-ph"><div class="iph-num">${mod.num}</div><div class="iph-name">${mod.name}</div><div class="iph-hint">Añade img: 'img/archivo.jpg'</div></div>`;
+      }
+      screenEl.appendChild(slot);
+    });
+
+    function allItems() { return document.querySelectorAll('.module-item'); }
+    function allSlots() { return document.querySelectorAll('.img-slot'); }
+
+    function setActiveModule(idx) {
+      activeIdx = idx;
+      allItems().forEach((el, i) => el.classList.toggle('active', i === idx));
+      allSlots().forEach((el, i) => el.classList.toggle('active', i === idx));
+      blNum.textContent = MODULES[idx].num;
+      blName.textContent = MODULES[idx].name;
+    }
+
+    function revealAndActivate(idx) {
+      allItems()[idx].classList.add('visible');
+      setActiveModule(idx);
+      revealed = idx + 1;
+    }
+
+    function step() {
+      if (hovered) return;
+      if (revealed < MODULES.length) { revealAndActivate(revealed); }
+      else { setActiveModule((activeIdx + 1) % MODULES.length); }
+      restartProgress();
+    }
+
+    function restartProgress() {
+      progressEl.classList.remove('running');
+      progressEl.style.animationPlayState = 'running';
+      void progressEl.offsetWidth;
+      progressEl.classList.add('running');
+    }
+
+    function pauseProgress() { progressEl.style.animationPlayState = 'paused'; clearInterval(timer); }
+    function resumeTimer() { restartProgress(); clearInterval(timer); timer = setInterval(step, INTERVAL); }
+
+    // Todos visibles desde el inicio; el ciclo arranca solo al entrar al slide
+    allItems().forEach(el => el.classList.add('visible'));
+
+    function startSlide2() {
+      clearInterval(timer);
+      revealed = MODULES.length;
+      revealAndActivate(0);
+      restartProgress();
+      timer = setInterval(step, INTERVAL);
+    }
+
+    /* Slide 9 — ciclo de fases */
+    let s9Timer = null;
+    let s9Idx   = 0;
+    const S9_CORE = 4; // fases 0-3 en ciclo (fase 4 opcional, no entra en el ciclo)
+
+    function setS9Hi(idx) {
+      document.querySelectorAll('.s9-phase').forEach((el, i) => {
+        el.classList.toggle('s9-hi', i === idx);
+      });
+    }
+
+    function startSlide9() {
+      s9Idx = 0;
+      setS9Hi(0);
+      clearInterval(s9Timer);
+      s9Timer = setInterval(() => {
+        s9Idx = (s9Idx + 1) % S9_CORE;
+        setS9Hi(s9Idx);
+      }, 2800);
+    }
+
+    /* Toast — maximizar ventana */
+    (function () {
+      const toast  = document.getElementById('toast-hint');
+      const toastOk = document.getElementById('toast-ok');
+      let autoClose;
+
+      function dismiss() {
+        toast.classList.remove('visible');
+        clearTimeout(autoClose);
+      }
+
+      toastOk.addEventListener('click', dismiss);
+
+      setTimeout(() => {
+        toast.classList.add('visible');
+        autoClose = setTimeout(dismiss, 10000);
+      }, 900);
+    })();
+
+  </script>
+</body>
+
+</html>
